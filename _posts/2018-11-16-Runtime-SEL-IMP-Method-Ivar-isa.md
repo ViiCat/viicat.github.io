@@ -11,6 +11,7 @@ SEL：选择器指向一个C String
 ```
 typedef struct objc_selector *SEL;
 ```
+<br/>
 
 IMP：指向实际执行函数体的函数指针
 
@@ -21,6 +22,8 @@ typedef void (*IMP)(void /* id, SEL, ... */ );
 typedef id (*IMP)(id, SEL, ...); 
 #endif
 ```
+<br/>
+
 Method：指向方法的指针
 ```
 typedef struct objc_method *Method;
@@ -33,6 +36,8 @@ struct objc_method {
     IMP method_imp                                           OBJC2_UNAVAILABLE;
 } 
 ```
+<br/>
+
 Ivar：成员变量指针
 
 ```
@@ -49,6 +54,7 @@ struct objc_ivar {
 #endif
 }    
 ```
+<br/>
 
 Property：属性指针
 
@@ -58,6 +64,7 @@ typedef struct objc_property *objc_property_t;//这个更常用
 ```
 
 isa：指向类的指针；id：
+<br/>
 
 ```
 typedef struct objc_object *id;
@@ -68,6 +75,7 @@ struct objc_object {
     Class isa  OBJC_ISA_AVAILABILITY;
 };
 ```
+<br/>
 
 Cache
 
@@ -86,7 +94,7 @@ struct objc_cache {
 };
 
 ```
-</br>
+<br/>
 <strong>参考文章</strong>
 
 https://blog.csdn.net/Hello_Hwc/article/details/49682857
