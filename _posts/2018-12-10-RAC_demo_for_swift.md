@@ -1,4 +1,10 @@
-### RAC demo for Swift
+---
+layout: post
+title: "RAC demo for Swift"
+date: 201x8-12-10 08:00:00 +0800
+categories: [Swift, ReactiveCocoa, iOS]
+---
+
 此Demo用RAC展示简单的登录界面:
 
 1、界面实现允许输入最多11位字符的用户名
