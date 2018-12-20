@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "RAC demo for Swift"
-date: 201x8-12-10 08:00:00 +0800
+date: 2018-12-10 08:00:00 +0800
 categories: [Swift, ReactiveCocoa, iOS]
 ---
 
@@ -10,6 +10,12 @@ categories: [Swift, ReactiveCocoa, iOS]
 1、界面实现允许输入最多11位字符的用户名
 
 2、当输入6位以上密码且11位字符达成条件后，登录按钮背景变成红色
+
+
+<a href = "https://github.com/ViiCat/SSSwiftRAC">Demo 传送门</a>
+
+### 效果
+<img src="/images/racswift.gif" width="300">
 
 ### 上代码
 LoginViewModel.swift
@@ -88,5 +94,3 @@ class LoginViewController: UIViewController {
     }
 }
 ```
-
-<a href = "https://github.com/ViiCat/SSSwiftRAC">Demo 传送门</a>
