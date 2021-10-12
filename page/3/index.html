@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>JM笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="JM笔记">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="JM笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="JasonMark">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="JM笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JM笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">项目中的一些出现频繁且可复用的知识点</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2018-11-16-Runtime-SEL-IMP-Method-Ivar-isa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/11/16/2018-11-16-Runtime-SEL-IMP-Method-Ivar-isa/" class="article-date">
+  <time class="dt-published" datetime="2018-11-16T00:00:00.000Z" itemprop="datePublished">2018-11-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Objective-C/">Objective-C</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/11/16/2018-11-16-Runtime-SEL-IMP-Method-Ivar-isa/">【Runtime】SEL、IMP、Method、Ivar、isa、Cache</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Runtime-基本类型"><a href="#Runtime-基本类型" class="headerlink" title="Runtime 基本类型"></a>Runtime 基本类型</h3><p>SEL：选择器指向一个C String</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_selector *SEL;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>IMP：指向实际执行函数体的函数指针</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#if !OBJC_OLD_DISPATCH_PROTOTYPES</span><br><span class="line">typedef void (*IMP)(void /* id, SEL, ... */ ); </span><br><span class="line">#else</span><br><span class="line">typedef id (*IMP)(id, SEL, ...); </span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>Method：指向方法的指针</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_method *Method;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct objc_method &#123;</span><br><span class="line">    SEL method_name                                          OBJC2_UNAVAILABLE;</span><br><span class="line">    char *method_types                                       OBJC2_UNAVAILABLE;</span><br><span class="line">    IMP method_imp                                           OBJC2_UNAVAILABLE;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>Ivar：成员变量指针</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_ivar *Ivar;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct objc_ivar &#123;</span><br><span class="line">    char *ivar_name                                          OBJC2_UNAVAILABLE;</span><br><span class="line">    char *ivar_type                                          OBJC2_UNAVAILABLE;</span><br><span class="line">    int ivar_offset                                          OBJC2_UNAVAILABLE;</span><br><span class="line">#ifdef __LP64__</span><br><span class="line">    int space                                                OBJC2_UNAVAILABLE;</span><br><span class="line">#endif</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>Property：属性指针</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_property *Property;</span><br><span class="line">typedef struct objc_property *objc_property_t;//这个更常用</span><br></pre></td></tr></table></figure>
+
+<p>isa：指向类的指针；id：<br><br/></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_object *id;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct objc_object &#123;</span><br><span class="line">    Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>Cache</p>
+<p>每当实例对象接收到消息时，它不会直接在isa指针指向的类方法列表里遍历查找能响应的方法，因为每次查找效率都太低，而优先在Cache中查找。<br>Runtime系统会把被调用的方法存进Cache里，就像计算机组成原理一样CUP绕过主存先访问Cache一样。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_cache *Cache</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct objc_cache &#123;</span><br><span class="line">    unsigned int mask /* total = mask + 1 */                 OBJC2_UNAVAILABLE;</span><br><span class="line">    unsigned int occupied                                    OBJC2_UNAVAILABLE;</span><br><span class="line">    Method buckets[1]                                        OBJC2_UNAVAILABLE;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<br/>
+<strong>参考文章</strong>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hello_Hwc/article/details/49682857">https://blog.csdn.net/Hello_Hwc/article/details/49682857</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/11/16/2018-11-16-Runtime-SEL-IMP-Method-Ivar-isa/" data-id="ckuntv92e000fljnv6d2q808h" data-title="【Runtime】SEL、IMP、Method、Ivar、isa、Cache" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-11-14-iOS毛玻璃效果" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/11/14/2018-11-14-iOS%E6%AF%9B%E7%8E%BB%E7%92%83%E6%95%88%E6%9E%9C/" class="article-date">
+  <time class="dt-published" datetime="2018-11-14T00:00:00.000Z" itemprop="datePublished">2018-11-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Objective-C/">Objective-C</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/11/14/2018-11-14-iOS%E6%AF%9B%E7%8E%BB%E7%92%83%E6%95%88%E6%9E%9C/">【iOS】UIVisualEffectView毛玻璃效果</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <br/>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/ViiCat/Demo">Demo 传送门<a/></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><img src="/images/screenshot_1.jpg" width="300">
+
+<h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><h3><strong>毛玻璃</strong></h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];</span><br><span class="line">UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:blur];</span><br><span class="line">[self.imgView addSubview:effectView];</span><br><span class="line">[effectView mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line">    make.edges.equalTo(self.imgView);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h3><strong>文字水印</strong></h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">UIBlurEffect *blur2 = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];</span><br><span class="line">UIVibrancyEffect *vibrancy = [UIVibrancyEffect effectForBlurEffect:blur2];</span><br><span class="line">UIVisualEffectView *effectView2 = [[UIVisualEffectView alloc] initWithEffect:vibrancy];</span><br><span class="line"></span><br><span class="line">UILabel *label = [[UILabel alloc] init];</span><br><span class="line">label.text = @&quot;Vibrancy Effect&quot;;</span><br><span class="line">label.font = [UIFont fontWithName:@&quot;HelveticaNeue-Bold&quot; size:30];</span><br><span class="line">label.textAlignment = NSTextAlignmentCenter;</span><br><span class="line">[effectView2.contentView addSubview:label];</span><br><span class="line">[label mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line">    make.left.equalTo(effectView2.mas_left);</span><br><span class="line">    make.top.equalTo(effectView2.mas_top).offset(20);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h3><strong>原图</strong></h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[self.imgView2 addSubview:effectView2];</span><br><span class="line">[effectView2 mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line">    make.edges.equalTo(self.imgView2);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/11/14/2018-11-14-iOS%E6%AF%9B%E7%8E%BB%E7%92%83%E6%95%88%E6%9E%9C/" data-id="ckuntv92b0008ljnve1k38pwk" data-title="【iOS】UIVisualEffectView毛玻璃效果" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-11-13-发布代码到服务器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/11/13/2018-11-13-%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2018-11-13T00:00:00.000Z" itemprop="datePublished">2018-11-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>►<a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/11/13/2018-11-13-%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">使用Git【发布代码】到服务器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>本地写了一个网页,想发布到自己的服务器上,让能通过域名(<a target="_blank" rel="noopener" href="http://www.xxxx.com)能被访问到/">www.xxxx.com）能被访问到</a>.</p>
+<h2 id="服务器上安装Git"><a href="#服务器上安装Git" class="headerlink" title="服务器上安装Git"></a>服务器上安装Git</h2><p>centos安装Git有两种方式，一种通过源安装，通过如下命今，即可一键安装成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git</span><br></pre></td></tr></table></figure>
+<p>查看Git版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p>安装完后通过命令查找Git执行程序的目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which git</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务器上创建仓库"><a href="#服务器上创建仓库" class="headerlink" title="服务器上创建仓库"></a>服务器上创建仓库</h2><p>在服务器上创建仓库目录并cd进目录，例如/usr/xxx/xxx/my_repository，<code>my_repository</code>就是刚新建的仓库文件夹. 执行命令创建仓库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p>【重要】让仓库接受代码提交：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config receive.denyCurrentBranch ignore</span><br></pre></td></tr></table></figure>
+<p>出现<code>Initialized empty Git repository in /usr/xxx/xxx/my_repository/.git/</code>表示创建成功</p>
+<h2 id="克隆服务器仓库到本地"><a href="#克隆服务器仓库到本地" class="headerlink" title="克隆服务器仓库到本地"></a>克隆服务器仓库到本地</h2><p>执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone ssh://root@xxx.xx.xxx.xx/usr/xxx/xxx/my_repository/.git</span><br></pre></td></tr></table></figure>
+<p>(xxx.xx.xxx.xx)是服务器公网IP</p>
+<h2 id="回到服务器端"><a href="#回到服务器端" class="headerlink" title="回到服务器端"></a>回到服务器端</h2><p>前提是本地提交或修改了文件到服务器，会发现文件没有或被修改；这时我们需要更新服务器端 git 仓库状态并检出文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/xxx/xxx/my_repository</span><br><span class="line"></span><br><span class="line">git update-server-info</span><br><span class="line"></span><br><span class="line">git checkout -f</span><br></pre></td></tr></table></figure>
+<p>文件即更新到服务器上，完成!</p>
+<h2 id="设置Git钩子"><a href="#设置Git钩子" class="headerlink" title="设置Git钩子"></a>设置Git钩子</h2><p>到这里已经实现了发布代码到服务器的一条龙服务。那么问题来了，每次本地 push 过后是不是都要回到服务器检出文件，麻烦死了。解决办法是有的，设置git更新钩子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd .git/hooks</span><br><span class="line"></span><br><span class="line">vim post-receive</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>复制如下内容到文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">unset GIT_DIR</span><br><span class="line">cd ..</span><br><span class="line">git checkout -f</span><br></pre></td></tr></table></figure>
+<p>将post-receive 替换为 post-update也可以, 不过需要先将post-update中的<code>exec git update-server-info</code>这一行删掉</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>克隆时</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone root@xxx.xx.xxx.xx/usr/xxx/xxx/my_repository/.git</span><br></pre></td></tr></table></figure>
+<p>无反应，并提示信息<br><code>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</code></p>
+<p>执行下面命令重新安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
+
+<p>参考内容：</p>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/shaohuixia/p/5503521.html">http://www.cnblogs.com/shaohuixia/p/5503521.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/11/13/2018-11-13-%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" data-id="ckuntv92a0007ljnvdv0a7qlk" data-title="使用Git【发布代码】到服务器" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-10-19-Jekyll使用笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/19/2018-10-19-Jekyll%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-10-19T08:41:24.000Z" itemprop="datePublished">2018-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Jekyll/">Jekyll</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/10/19/2018-10-19-Jekyll%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">【Jekyll】使用笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Jekyll"><a href="#Jekyll" class="headerlink" title="Jekyll"></a>Jekyll</h2><p>头部模版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">layout: post</span><br><span class="line">title: &quot;【类型】xxx&quot;</span><br><span class="line">date: 201x-xx-xx 08:00:00 +0800</span><br><span class="line">categories: [Jekyll, xxx]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bundle exec jekyll build</span><br></pre></td></tr></table></figure>
+
+<p>本地预览</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bundle exec jekyll server</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="安装遇到的问题"><a href="#安装遇到的问题" class="headerlink" title="安装遇到的问题"></a>安装遇到的问题</h2><p><code>jekyll install</code>报错，ruby版本过低</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LiudeMacBook-Pro:LocalBlog liujie$ sudo gem install jekyll</span><br><span class="line">Password:</span><br><span class="line">ERROR:  Error installing jekyll:</span><br><span class="line">	public_suffix requires Ruby version &gt;= 2.1.</span><br><span class="line">LiudeMacBook-Pro:LocalBlog liujie$ ruby -v</span><br><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure>
+<p>在终端执行命令行更新ruby</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.rvm.io | bash -s stable --autolibs=enabled --ruby</span><br></pre></td></tr></table></figure>
+
+<p>输入<code>rvm -v</code>查看版本</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/10/19/2018-10-19-Jekyll%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-id="ckuntv9220000ljnv8q3c5gtw" data-title="【Jekyll】使用笔记" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-10-19-MySQL使用笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/19/2018-10-19-MySQL%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-10-19T08:41:24.000Z" itemprop="datePublished">2018-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/10/19/2018-10-19-MySQL%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">【MySQL】使用笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a href="#mysql_add">增加</a></p>
+<p><a href="#mariadb_encoding">数据库中文显示乱码</a></p>
+<h2 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h2><p>安装:<code>yum install mariadb mariadb-server</code></p>
+<p>启动:<code>systemctl start mariadb</code></p>
+<p>重启:<code>systemctl restart mariadb</code></p>
+<p>添加到开机启动<code>systemctl enable mariadb.service</code></p>
+<p>配置<br><code>mysql_secure_installation</code></p>
+<p>登录数据库<code>mysql -u root -p</code></p>
+<p>显示数据库<code>SHOW DATABASE;</code></p>
+<p>显示数据库中的表<code>SHOW TABLES;</code></p>
+<p>查看表的数据结构<code>DESC user;</code></p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>创建mysql数据库<code>CREATE DATABASE mysql;</code></p>
+<p>进入数据库<code>use mysql;</code></p>
+<p>创建表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,</span><br><span class="line">name VARCHAR(100) NOT NULL,</span><br><span class="line">gender VARCHAR(10),</span><br><span class="line">age INT,</span><br><span class="line">phone VARCHAR(100),</span><br><span class="line">submission_date DATE</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>查询mysql库下的user表中的所有<code>SELECT * FROM mysql.user;</code></p>
+<p>查询user表中的host，user，password字段<code>SELECT host,user,password from user;</code></p>
+<p>刷新数据库信息<code>flush privileges;</code></p>
+<h3 id="增加"><a href="#增加" class="headerlink" title="增加"></a><a name='mysql_add'></a>增加</h3><p>添加age字段到mysql表中<code>ALTER TABLE mysql ADD age VARCHAR(4);</code></p>
+<p>在name字段后添加字段age<code>ALTER TABLE mysql ADD age  VARCHAR(5)  AFTER name</code></p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>删除数据表<code>DROP TABLE table_name;</code></p>
+<p>删除age字段<code>ALTER TABLE mysql DROP age</code></p>
+<h1 id="PHP部分"><a href="#PHP部分" class="headerlink" title="PHP部分"></a>PHP部分</h1><h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$servername = &quot;localhost&quot;; </span><br><span class="line">$username = &quot;username&quot;; </span><br><span class="line">$password = &quot;password&quot;; </span><br><span class="line"></span><br><span class="line">// 创建连接 </span><br><span class="line">$conn = mysqli_connect($servername, $username, $password); </span><br><span class="line"></span><br><span class="line">// 检测连接 </span><br><span class="line">if (!$conn) &#123; </span><br><span class="line">    die(&quot;Connection failed: &quot; . mysqli_connect_error()); </span><br><span class="line">&#125; </span><br><span class="line">echo &quot;Connected successfully&quot;; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/php/php-mysql-create.html">https://www.w3cschool.cn/php/php-mysql-create.html</a></p>
+<h2 id="插入数据库"><a href="#插入数据库" class="headerlink" title="插入数据库"></a>插入数据库</h2><p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/php/php-mysql-insert.html">https://www.w3cschool.cn/php/php-mysql-insert.html</a></p>
+<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/php/php-mysql-select.html">https://www.w3cschool.cn/php/php-mysql-select.html</a></p>
+<h2 id="数据库中文显示乱码"><a href="#数据库中文显示乱码" class="headerlink" title="数据库中文显示乱码"></a><a name='mariadb_encoding'></a>数据库中文显示乱码</h2><p>查看当前使用的字符集<code>SHOW VARIABLES LIKE &#39;character%&#39;;</code><br>会显示一个信息表, 很多选项都不是<strong>utf8</strong></p>
+<h4 id="更改Client和Server编码都是UTF-8"><a href="#更改Client和Server编码都是UTF-8" class="headerlink" title="更改Client和Server编码都是UTF-8"></a>更改Client和Server编码都是UTF-8</h4><p><strong>Client</strong></p>
+<p><code>vim /etc/my.cnf.d/client.cnf</code></p>
+<p>在client.cnf中[client]添加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+
+<p><strong>Server</strong></p>
+<p><code>vim /etc/my.cnf.d/server.cnf</code></p>
+<p>在server.cnf中[mysqld]添加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init-connect=&#x27;SET NAMES utf8&#x27;  </span><br><span class="line">character-set-server = utf8</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启MariaDB"><a href="#重启MariaDB" class="headerlink" title="重启MariaDB"></a>重启MariaDB</h4><p><code>systemctl restart mariadb</code></p>
+<p>PS:重启mariadb服务后，<code>character_set_database</code>并没修改，可以直接设置<code>character_set_database</code>编码格式为utf8，如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set character_set_database = &#x27;utf8&#x27;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/10/19/2018-10-19-MySQL%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-id="ckuntv9250001ljnv82frc2p0" data-title="【MySQL】使用笔记" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-10-19-PHP+MySQL写简单接口" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/19/2018-10-19-PHP+MySQL%E5%86%99%E7%AE%80%E5%8D%95%E6%8E%A5%E5%8F%A3/" class="article-date">
+  <time class="dt-published" datetime="2018-10-19T08:41:24.000Z" itemprop="datePublished">2018-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/10/19/2018-10-19-PHP+MySQL%E5%86%99%E7%AE%80%E5%8D%95%E6%8E%A5%E5%8F%A3/">【PHP】写简单接口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="PHP-MySQL返回JSON数据"><a href="#PHP-MySQL返回JSON数据" class="headerlink" title="PHP+MySQL返回JSON数据"></a>PHP+MySQL返回JSON数据</h2><p><strong>创建表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,</span><br><span class="line">name VARCHAR(100) NOT NULL,</span><br><span class="line">gender VARCHAR(10),</span><br><span class="line">age INT,</span><br><span class="line">phone VARCHAR(100),</span><br><span class="line">submission_date DATE</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据库表结构</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+-----------------+--------------+------+-----+---------+----------------+</span><br><span class="line">| Field           | Type         | Null | Key | Default | Extra          |</span><br><span class="line">+-----------------+--------------+------+-----+---------+----------------+</span><br><span class="line">| id              | int(11)      | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| name            | varchar(100) | NO   |     | NULL    |                |</span><br><span class="line">| gender          | varchar(10)  | YES  |     | NULL    |                |</span><br><span class="line">| age             | int(11)      | YES  |     | NULL    |                |</span><br><span class="line">| phone           | varchar(100) | YES  |     | NULL    |                |</span><br><span class="line">| submission_date | date         | YES  |     | NULL    |                |</span><br><span class="line">+-----------------+--------------+------+-----+---------+----------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>userinfo.php</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&quot;content-type:text/html;charset=utf-8&quot;);</span><br><span class="line">$servername = &quot;localhost&quot;;</span><br><span class="line">$username = &quot;xxxx&quot;;		//数据库用户名</span><br><span class="line">$password = &quot;xxxxxxx&quot;;	//数据库用户密码</span><br><span class="line">$dbname = &quot;xxxx&quot;;		//数据库名称</span><br><span class="line"></span><br><span class="line">// 创建连接</span><br><span class="line">// $conn = new mysqli($servername, $username, $password, $dbname);</span><br><span class="line">$conn = mysqli_connect($servername, $username, $password, $dbname);</span><br><span class="line"></span><br><span class="line">//检测连接</span><br><span class="line">if (mysqli_connect_errno($conn)) &#123;</span><br><span class="line">    die(&quot;Connection failed: &quot; . mysqli_connect_error());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//设置编码</span><br><span class="line">mysqli_query($conn, &#x27;set names utf8&#x27;);</span><br><span class="line"></span><br><span class="line">//读取数据</span><br><span class="line">$sql=&quot;SELECT * FROM user WHERE id=1&quot;;</span><br><span class="line">$result=mysqli_query($conn,$sql);</span><br><span class="line"></span><br><span class="line">while ($row=mysqli_fetch_array($result)) &#123;</span><br><span class="line">	echo json_encode($row, JSON_UNESCAPED_UNICODE);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/10/19/2018-10-19-PHP+MySQL%E5%86%99%E7%AE%80%E5%8D%95%E6%8E%A5%E5%8F%A3/" data-id="ckuntv9280003ljnv6w9xft9c" data-title="【PHP】写简单接口" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-10-19-SublimeText插件安装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/19/2018-10-19-SublimeText%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/" class="article-date">
+  <time class="dt-published" datetime="2018-10-19T08:41:24.000Z" itemprop="datePublished">2018-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IDE/">IDE</a>►<a class="article-category-link" href="/categories/IDE/SublimeText/">SublimeText</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/10/19/2018-10-19-SublimeText%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/">【SublimeText】插件安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>下载地址: <a target="_blank" rel="noopener" href="https://www.sublimetext.com/3">https://www.sublimetext.com/3</a></p>
+<h2 id="安装-Package-Control"><a href="#安装-Package-Control" class="headerlink" title="安装 Package Control"></a>安装 Package Control</h2><p>SublimeText 插件都要借助这个工具来安装，打开SublimeText点击顶部菜单View -&gt; Show Console（或者使用快捷键command + ~），会弹起一个控制台，输入下面代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request,os,hashlib; h = &#x27;6f4c264a24d933ce70df5dedcf1dcaee&#x27; + &#x27;ebe013ee18cced0ef93d5f746d80ef60&#x27;; pf = &#x27;Package Control.sublime-package&#x27;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#x27;http://packagecontrol.io/&#x27; + pf.replace(&#x27; &#x27;, &#x27;%20&#x27;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#x27;Error validating download (got %s instead of %s), please try manual install&#x27; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#x27;wb&#x27; ).write(by)</span><br></pre></td></tr></table></figure>
+
+<p>或粘贴 <a target="_blank" rel="noopener" href="https://packagecontrol.io/installation">https://packagecontrol.io/installation</a> 里面代码，等待安装完成。</p>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>点击顶部菜单SublimeText -&gt; Preferences -&gt; PackageControl 或通过快捷键Command + Shift + P 打开PackageControl 来安装需要的插件</p>
+<p>参考:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/im5437/articles/8119906.html">https://www.cnblogs.com/im5437/articles/8119906.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/10/19/2018-10-19-SublimeText%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/" data-id="ckuntv9280004ljnvg5lacc4c" data-title="【SublimeText】插件安装" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-10-19-从零开始服务器开发" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/19/2018-10-19-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/" class="article-date">
+  <time class="dt-published" datetime="2018-10-19T08:41:24.000Z" itemprop="datePublished">2018-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/10/19/2018-10-19-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/">从零开始服务器开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h2><p>选购海外服务器(因为不用备案)且便宜,购买地址：<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/pro/cvmoversea?from=10168">https://cloud.tencent.com/act/pro/cvmoversea?from=10168</a></p>
+<h2 id="终端登录服务器"><a href="#终端登录服务器" class="headerlink" title="终端登录服务器"></a>终端登录服务器</h2><p>我用的Mac在终端键入<code>ssh root@服务器地址</code>输入密码即可</p>
+<p>Mac配置腾讯云服务器SSH秘钥免登陆<br><a target="_blank" rel="noopener" href="https://liuyanzhao.com/6952.html">https://liuyanzhao.com/6952.html</a></p>
+<h2 id="安装配置-Nginx"><a href="#安装配置-Nginx" class="headerlink" title="安装配置 Nginx"></a>安装配置 Nginx</h2><p>软件安装如何安装: <a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/213/2046">https://cloud.tencent.com/document/product/213/2046</a></p>
+<p>安装<code>yum install nginx</code></p>
+<p>启动Nginx<code>systemctl start nginx.service</code></p>
+<p>添加到开机启动<code>systemctl enable nginx.service</code></p>
+<p>停止开机启动<code>systemctl disable nginx.service</code></p>
+<p>查看服务状态<code>systemctl status nginx.service</code></p>
+<p>重启<code>systemctl restart nginx.service</code></p>
+<p>查看所有已启动服务<code>systemctl list-units --type=service</code></p>
+<h2 id="安装配置MariaDB"><a href="#安装配置MariaDB" class="headerlink" title="安装配置MariaDB"></a>安装配置MariaDB</h2><p>安装<code>yum install mariadb mariadb-server</code></p>
+<p>启动MariaDB<code>systemctl start mariadb.service</code></p>
+<p>添加到开机启动<code>systemctl enable mariadb.service</code></p>
+<p>配置<br><code>mysql_secure_installation</code></p>
+<p>登录数据库<code>mysql -u root -p</code></p>
+<h2 id="安装配置PHP"><a href="#安装配置PHP" class="headerlink" title="安装配置PHP"></a>安装配置PHP</h2><p>安装<code>yum install php php-fpm php-mysql</code></p>
+<p>启动PHP-FPM 服务<code>systemctl start php-fpm</code></p>
+<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><p>查看进程<code>netstat -tpnul</code></p>
+<p>杀掉进程<code>kill -s 9 进程编号</code></p>
+<p>参考:</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/49e10ff330e5">https://www.jianshu.com/p/49e10ff330e5</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/labs/lab/10029">https://cloud.tencent.com/developer/labs/lab/10029</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/10/19/2018-10-19-%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/" data-id="ckuntv9290005ljnvgg060vbv" data-title="从零开始服务器开发" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub/">GitHub</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Github/Hexo/">Hexo</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/SublimeText/">SublimeText</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Jekyll/">Jekyll</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Cocoapods/">Cocoapods</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/CoreData/">CoreData</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/GCD/">GCD</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/">Objective-C</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/AVPlayer/">AVPlayer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/NSKeyedArchiver/">NSKeyedArchiver</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/Runtime/">Runtime</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/">Swift</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/ReactiveCocoa/">ReactiveCocoa</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/git/">git</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">Hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/">GitHub上搭建Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/">Github配置SSH for Mac</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/">iOS带占位符【输入框】和输入数限制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/">iOS【AVPlayer视频播放器】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 JasonMark<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

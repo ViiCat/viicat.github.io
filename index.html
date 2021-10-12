@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>JM笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="JM笔记">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:site_name" content="JM笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="JasonMark">
+<meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="JM笔记" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -42,8 +43,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">JM笔记</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">项目中的一些出现频繁且可复用的知识点</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -57,12 +62,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
       </div>
     </div>
   </div>
@@ -71,12 +76,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-Hexo常用指令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/10/12/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-10-12T04:00:43.171Z" itemprop="datePublished">2021-10-12</time>
+    <a href="/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2021-10-12T08:29:54.000Z" itemprop="datePublished">2021-10-12</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -85,7 +94,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/12/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">Hexo常用指令</a>
     </h1>
   
 
@@ -93,24 +102,495 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="头部模版"><a href="#头部模版" class="headerlink" title="头部模版"></a>头部模版</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: Hexo常用指令</span><br><span class="line">date: 2021-10-12 16:29:54</span><br><span class="line">categories: [Hexo]</span><br><span class="line">tags:</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h2 id="本地执行"><a href="#本地执行" class="headerlink" title="本地执行"></a>本地执行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo serve </span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" data-id="ckuntv93p0017ljnv8nhk6g3h" data-title="Hexo常用指令" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+
+  
+    <article id="post-2021-10-12-GitHub上搭建Hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/" class="article-date">
+  <time class="dt-published" datetime="2021-10-12T08:27:49.000Z" itemprop="datePublished">2021-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Github/">Github</a>►<a class="article-category-link" href="/categories/Github/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/">GitHub上搭建Hexo</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/" data-id="ckuntv93m0014ljnvdxoyepqj" data-title="GitHub上搭建Hexo" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2021-10-12-Github配置SSH-for-Mac" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/" class="article-date">
+  <time class="dt-published" datetime="2021-10-12T07:09:49.000Z" itemprop="datePublished">2021-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/GitHub/">GitHub</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/">Github配置SSH for Mac</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="查看终端是否存在SSH-Key"><a href="#查看终端是否存在SSH-Key" class="headerlink" title="查看终端是否存在SSH Key"></a>查看终端是否存在SSH Key</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/.ssh</span><br><span class="line">$ ls</span><br></pre></td></tr></table></figure>
+<p>查看是否已经存在 id_rsa.pub 或 id_dsa.pub 文件</p>
+<h2 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<p>会提示输入两次密码，该密码是push文件时要输的密码，也可不输入直接按回车。</p>
+<h2 id="添加公钥到远程仓库"><a href="#添加公钥到远程仓库" class="headerlink" title="添加公钥到远程仓库"></a>添加公钥到远程仓库</h2><p>查看mac上生成的公钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>把内容复制出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDZRvOw8ZkRxFE+R1JAsi1EwnqUXep/993pkHrmJTttHD3CG1BBX0Z9yxGQOehET0TNBe9A79nOWEVYL8FlRzCErS4xrqBbJE8mjB/IYX+F46laJxHfQ1kzpTd0nezr8uMTQTZfggKesBoOkWsPIBiOh+ZsOsNpeDnw8lXtH6LUzZtah1cd2Gr1jznAcL3VOlASTnpuBTDW0Kpjt3Q3FdKP0LnI82+fngQOUO+LFS4Fu6mksxeox9JDf3ZvBdBZD7zPFS+BjJ9FSKvydqiIoEgwOGTxS3gjqEezOSmv7o+VXe4pFLQDWBx/vJrF+uJsab3R3hJnd6d9j1PKpMPlHGMMDSnH9KbJfrsIr2wCGJqYFqpx5cjn9brVFkJDo5fCZPgOSva40vbZJeOoV3sJ95j/FOks4PZsfptwpdAydsanuPkGayJMukwQXpOMhuerffPKlsN/vbR6uZ6stPdqcRIi3hx/xQ2nntMb3YStyKtr/6D6wTUlXFzfK5Yu+96rD8M= xxxxxx@duckdake.com</span><br></pre></td></tr></table></figure>
+<p>登录github账户，<code>头像-&gt; Settings-&gt; SSH and GPG keys-&gt; New SSH key</code> 然后将上面复制的内容粘贴进”Key”文本域，点击Add key即可完成</p>
+<p>验证key是否可用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>如果输出:<code>Hi ViiCat! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code>就算设置成功了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/12/hello-world/" data-id="ckunkkhgm0000spnv3ubw52f5" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/" data-id="ckuntv93o0016ljnvcint3ar3" data-title="Github配置SSH for Mac" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-02-04-iOS带占位符输入框和输入数限制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/" class="article-date">
+  <time class="dt-published" datetime="2019-02-04T00:00:00.000Z" itemprop="datePublished">2019-02-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Objective-C/">Objective-C</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/">iOS带占位符【输入框】和输入数限制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>带占位符【输入框】和输入数限制</p>
+</blockquote>
+<p><a href = "https://github.com/ViiCat/SSTextView">Demo 传送门</a></p>
+<h3 id="Demo运行效果"><a href="#Demo运行效果" class="headerlink" title="Demo运行效果"></a>Demo运行效果</h3><img src="/images/textView.gif" width="300">
+<br/><br/>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/" data-id="ckuntv93l0013ljnvbftp1b6q" data-title="iOS带占位符【输入框】和输入数限制" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-01-09-iOS视频播放器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2019-01-09T00:00:00.000Z" itemprop="datePublished">2019-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Objective-C/">Objective-C</a>►<a class="article-category-link" href="/categories/iOS/Objective-C/AVPlayer/">AVPlayer</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/">iOS【AVPlayer视频播放器】</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>iOS AVPlayer视频播放器</p>
+</blockquote>
+<p><a href = "https://github.com/ViiCat/SSVideoPlayer">Demo 传送门</a></p>
+<h3 id="Demo运行效果"><a href="#Demo运行效果" class="headerlink" title="Demo运行效果"></a>Demo运行效果</h3><img src="/images/videoPlayer.gif" width="300">
+<br/><br/>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/" data-id="ckuntv93k0011ljnv5sosalec" data-title="iOS【AVPlayer视频播放器】" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-12-23-iOS授权的封装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/23/2018-12-23-iOS%E6%8E%88%E6%9D%83%E7%9A%84%E5%B0%81%E8%A3%85/" class="article-date">
+  <time class="dt-published" datetime="2018-12-23T00:00:00.000Z" itemprop="datePublished">2018-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Objective-C/">Objective-C</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/12/23/2018-12-23-iOS%E6%8E%88%E6%9D%83%E7%9A%84%E5%B0%81%E8%A3%85/">iOS【访问授权】</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>iOS 相册、相机、日历、提醒事项、地理位置定位</p>
+</blockquote>
+<p><a href = "https://github.com/ViiCat/SSPermissionDemo">Demo 传送门</a></p>
+<h3 id="1、首先-Info-plist-添加授权表"><a href="#1、首先-Info-plist-添加授权表" class="headerlink" title="1、首先 Info.plist 添加授权表"></a>1、首先 Info.plist 添加授权表</h3><p>按住键盘Control点击项目里的Info.plist文件,Open As -&gt; Srouce Code 将下面的授权键值对按需添加进去:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 相册 --&gt;</span><br><span class="line">&lt;key&gt;NSPhotoLibraryUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问相册&lt;/string&gt;</span><br><span class="line">&lt;!-- 相机 --&gt;</span><br><span class="line">&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问相机&lt;/string&gt;</span><br><span class="line">&lt;!-- 麦克风 --&gt;</span><br><span class="line">&lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问麦克风&lt;/string&gt;</span><br><span class="line">&lt;!-- 位置 --&gt;</span><br><span class="line">&lt;key&gt;NSLocationUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问位置&lt;/string&gt;</span><br><span class="line">&lt;!-- 在使用期间访问位置 --&gt;</span><br><span class="line">&lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能在使用期间访问位置&lt;/string&gt;</span><br><span class="line">&lt;!-- 始终访问位置 --&gt;</span><br><span class="line">&lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能始终访问位置&lt;/string&gt;</span><br><span class="line">&lt;!-- 日历 --&gt;</span><br><span class="line">&lt;key&gt;NSCalendarsUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问日历&lt;/string&gt;</span><br><span class="line">&lt;!-- 提醒事项 --&gt;</span><br><span class="line">&lt;key&gt;NSRemindersUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问提醒事项&lt;/string&gt;</span><br><span class="line">&lt;!-- 运动与健身 --&gt;</span><br><span class="line">&lt;key&gt;NSMotionUsageDescription&lt;/key&gt; </span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问运动与健身&lt;/string&gt;</span><br><span class="line">&lt;!-- 健康更新 --&gt;</span><br><span class="line">&lt;key&gt;NSHealthUpdateUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问健康更新 &lt;/string&gt;</span><br><span class="line">&lt;!-- 健康分享 --&gt;</span><br><span class="line">&lt;key&gt;NSHealthShareUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问健康分享&lt;/string&gt;</span><br><span class="line">&lt;!-- 蓝牙 --&gt;</span><br><span class="line">&lt;key&gt;NSBluetoothPeripheralUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问蓝牙&lt;/string&gt;</span><br><span class="line">&lt;!-- 媒体资料库 --&gt;</span><br><span class="line">&lt;key&gt;NSAppleMusicUsageDescription&lt;/key&gt;</span><br><span class="line">&lt;string&gt;App需要您的同意,才能访问媒体资料库&lt;/string&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、其次业务代码-就在Demo里-PermissionsManager-文件夹内"><a href="#2、其次业务代码-就在Demo里-PermissionsManager-文件夹内" class="headerlink" title="2、其次业务代码 就在Demo里 PermissionsManager 文件夹内"></a>2、其次业务代码 就在Demo里 <code>PermissionsManager</code> 文件夹内</h3><h3 id="3、运行效果"><a href="#3、运行效果" class="headerlink" title="3、运行效果"></a>3、运行效果</h3><h4 id="相册、相机"><a href="#相册、相机" class="headerlink" title="相册、相机"></a>相册、相机</h4><img src="/images/permission.gif" width="300">
+<br/><br/>
+
+<h4 id="添加日历事件"><a href="#添加日历事件" class="headerlink" title="添加日历事件"></a>添加日历事件</h4><img src="/images/calendarEvent.gif" width="300">
+<br/><br/>
+
+<h4 id="添加提醒事项"><a href="#添加提醒事项" class="headerlink" title="添加提醒事项"></a>添加提醒事项</h4><img src="/images/remindar.gif" width="300">
+<br/><br/>
+
+<h4 id="添加定位"><a href="#添加定位" class="headerlink" title="添加定位"></a>添加定位</h4><img src="/images/location.gif" width="300">
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/23/2018-12-23-iOS%E6%8E%88%E6%9D%83%E7%9A%84%E5%B0%81%E8%A3%85/" data-id="ckuntv93j0010ljnv7qtm33qt" data-title="iOS【访问授权】" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-12-19-iOS生成二维码支持改变前背景颜色" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/19/2018-12-19-iOS%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%94%AF%E6%8C%81%E6%94%B9%E5%8F%98%E5%89%8D%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/" class="article-date">
+  <time class="dt-published" datetime="2018-12-19T00:00:00.000Z" itemprop="datePublished">2018-12-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Objective-C/">Objective-C</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/12/19/2018-12-19-iOS%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%94%AF%E6%8C%81%E6%94%B9%E5%8F%98%E5%89%8D%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/">iOS【生成二维码】支持改变前背景颜色</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="iOS生成二维码支持改变前背景颜色"><a href="#iOS生成二维码支持改变前背景颜色" class="headerlink" title="iOS生成二维码支持改变前背景颜色"></a>iOS生成二维码支持改变前背景颜色</h3><p>Demo调用系统生成二维码:</p>
+<p>1、根据用户系定义的内容生成二维码</p>
+<p>2、二维码前景颜色和背景颜色可以根据需要改变</p>
+<p><a href = "https://github.com/ViiCat/SSQRCode">Demo 传送门</a></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><img src="/images/qrcode.gif" width="300">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/19/2018-12-19-iOS%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%94%AF%E6%8C%81%E6%94%B9%E5%8F%98%E5%89%8D%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/" data-id="ckuntv93j000yljnv3yqogb7i" data-title="iOS【生成二维码】支持改变前背景颜色" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-12-10-RAC_demo_for_swift" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/10/2018-12-10-RAC_demo_for_swift/" class="article-date">
+  <time class="dt-published" datetime="2018-12-10T00:00:00.000Z" itemprop="datePublished">2018-12-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Swift/">Swift</a>►<a class="article-category-link" href="/categories/iOS/Swift/ReactiveCocoa/">ReactiveCocoa</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/12/10/2018-12-10-RAC_demo_for_swift/">RAC demo for Swift</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>此Demo用RAC展示简单的登录界面:</p>
+<p>1、界面实现允许输入最多11位字符的用户名</p>
+<p>2、当输入6位以上密码且11位字符达成条件后，登录按钮背景变成红色</p>
+<p><a href = "https://github.com/ViiCat/SSSwiftRAC">Demo 传送门</a></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><img src="/images/racswift.gif" width="300">
+
+<h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><p>LoginViewModel.swift</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">class LoginViewModel: NSObject &#123;</span><br><span class="line">    </span><br><span class="line">    func binding(account: UITextField, password: UITextField, loginButton: UIButton) &#123;</span><br><span class="line">        </span><br><span class="line">        // 信号</span><br><span class="line">        let accountSignal  = account.reactive.continuousTextValues</span><br><span class="line">        let passwordSignal = password.reactive.continuousTextValues</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // 用户名输入信号</span><br><span class="line">        let accountMapSignal = accountSignal.map(&#123; (value) -&gt; Bool in</span><br><span class="line">            </span><br><span class="line">            // 字符串大于11位数 截取前11位</span><br><span class="line">            if ((value!.characters.count) &gt; 11) &#123;</span><br><span class="line">                </span><br><span class="line">                let startIdx = value?.index((value!.startIndex), offsetBy: 0)</span><br><span class="line">                let endIdx = value?.index(startIdx!, offsetBy:11)</span><br><span class="line">                let result = value!.substring(with: startIdx!..&lt;endIdx!)</span><br><span class="line">                </span><br><span class="line">                account.text = result</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 返回信号的值</span><br><span class="line">            return  account.text!.characters.count == 11 ? true : false</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // 密码输入信号</span><br><span class="line">        let passwordMapSignal = passwordSignal.map(&#123; (value) -&gt; Bool in</span><br><span class="line">            // 返回信号的值</span><br><span class="line">            return value!.characters.count &gt; 5 ? true : false</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // 合并信号</span><br><span class="line">        let bgColorSignl = Signal.combineLatest(accountMapSignal, passwordMapSignal).map &#123; (arg) -&gt; UIColor in</span><br><span class="line">            </span><br><span class="line">            let (value1, value2) = arg</span><br><span class="line">            return value1 &amp;&amp; value2 ? .red : .lightGray</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        let bgColor = Property(initial: .lightGray, then: bgColorSignl)</span><br><span class="line">        </span><br><span class="line">        // 绑定</span><br><span class="line">        loginButton.reactive.backgroundColor &lt;~ bgColor</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>LoginViewController.swift</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">class LoginViewController: UIViewController &#123;</span><br><span class="line"></span><br><span class="line">    @IBOutlet weak var txtAccount: UITextField!</span><br><span class="line">    </span><br><span class="line">    @IBOutlet weak var txtPwd: UITextField!</span><br><span class="line">    </span><br><span class="line">    @IBOutlet weak var btnLogin: UIButton!</span><br><span class="line">    </span><br><span class="line">    override func viewDidLoad() &#123;</span><br><span class="line">        super.viewDidLoad()</span><br><span class="line"></span><br><span class="line">        // Do any additional setup after loading the view.</span><br><span class="line">        let viewModel = LoginViewModel()</span><br><span class="line">        viewModel.binding(account: txtAccount, password: txtPwd, loginButton: btnLogin)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/10/2018-12-10-RAC_demo_for_swift/" data-id="ckuntv93i000xljnv6udu1xmh" data-title="RAC demo for Swift" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-12-06-ReactiveCocoa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/06/2018-12-06-ReactiveCocoa/" class="article-date">
+  <time class="dt-published" datetime="2018-12-06T00:00:00.000Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Swift/">Swift</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/12/06/2018-12-06-ReactiveCocoa/">【ReactiveCocoa】 for Swift and OC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="ReactiveCocoa-for-Swift"><a href="#ReactiveCocoa-for-Swift" class="headerlink" title="ReactiveCocoa for Swift"></a>ReactiveCocoa for Swift</h3><p><a href = "https://github.com/ReactiveCocoa">传送门</a></p>
+<blockquote>
+<p><code>ReactiveCocoa</code> 主要集中在Swift和UI层上，将原来基于RAC面向UI层扩展库&lt;a href “<a target="_blank" rel="noopener" href="https://github.com/RACCommunity/Rex&quot;&gt;Rex">https://github.com/RACCommunity/Rex&quot;&gt;Rex</a></a>合并进了RAC</p>
+<p><code>ReactiveSwift</code> RAC中只和Swift平台相关的核心代码单独抽取生成新框架，可以在其他平台上被使用，不局限在CocoaTouch 和 Cocoa 中</p>
+<p><code>ReactiveObjC</code> 针对OC代码的库</p>
+<p><code>ReactiveObjCBridge</code> OC 迁移到 Swift 过程中，可能使用Swift 调用 RAC2 中基于 OC 写的 API</p>
+</blockquote>
+<p>如项目是纯 Swift ，使用 ReactiveCocoa。但 RAC 依赖于 ReactiveSwift ，等于引入了2个库</p>
+<p>如项目是纯 OC ，使用ReactiveObjC。这个库包含RAC 2 的全部代码</p>
+<p>如项目是 Swift 和 OC 混编，需引入 ReactiveCocoa 和 ReactiveObjCBridge 。但是ReactiveObjCBridge 依赖于 ReactiveObjC ，等于引入了4个库</p>
+<p>参考:</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/dfcf0cce37e6">https://www.jianshu.com/p/dfcf0cce37e6</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3a56d10e99a7">https://www.jianshu.com/p/3a56d10e99a7</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4554fd087bed">https://www.jianshu.com/p/4554fd087bed</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/06/2018-12-06-ReactiveCocoa/" data-id="ckuntv93h000vljnv5bog2rub" data-title="【ReactiveCocoa】 for Swift and OC" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-12-03-Realm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/03/2018-12-03-Realm/" class="article-date">
+  <time class="dt-published" datetime="2018-12-03T00:00:00.000Z" itemprop="datePublished">2018-12-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Swift/">Swift</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/12/03/2018-12-03-Realm/">【Realm】数据存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h3><h3 id="打印Realm文件存放路径"><a href="#打印Realm文件存放路径" class="headerlink" title="打印Realm文件存放路径"></a>打印Realm文件存放路径</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let realm = try! Realm()</span><br><span class="line">print(realm.configuration.fileURL!)</span><br></pre></td></tr></table></figure>
+<p>可以用RealmBrowser打开路径下的.realm文件，可视化管理它。<br><a href = "https://itunes.apple.com/cn/app/realm-browser/id1007457278?mt=12">RealmBrowser传送门</a></p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Dog: Object &#123;</span><br><span class="line">    @objc dynamic var id = UUID().uuidString</span><br><span class="line">    @objc dynamic var age = 0</span><br><span class="line">    @objc dynamic var firstName: String? = nil</span><br><span class="line">    @objc dynamic var lastName: String? = nil</span><br><span class="line">    @objc dynamic var name: String? = nil</span><br><span class="line"></span><br><span class="line">    // 索引</span><br><span class="line">    override class func indexedProperties() -&gt; [String] &#123;</span><br><span class="line">        return [&quot;name&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 主键不支持递增</span><br><span class="line">    override class func primaryKey() -&gt; String? &#123;</span><br><span class="line">        return &quot;id&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 忽略存储字段</span><br><span class="line">    override class func ignoredProperties() -&gt; [String] &#123;</span><br><span class="line">        return [&quot;&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let dog = Dog()</span><br><span class="line">dog.name = &quot;Petter&quot;</span><br><span class="line">dog.age = 2</span><br><span class="line"></span><br><span class="line">try! realm.write &#123;</span><br><span class="line">    realm.add(dog)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let objects = self.realm.objects(Dog.self).filter(&quot;age = 6&quot;)</span><br><span class="line">try! self.realm.write(&#123;</span><br><span class="line">    self.realm.delete(objects)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let objects = self.realm.objects(Dog.self).filter(&quot;age = 2&quot;)</span><br><span class="line">try! self.realm.write &#123;</span><br><span class="line">    for item in objects &#123;</span><br><span class="line">        item.age = 6</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for item in objects &#123;</span><br><span class="line">    print(&quot;Count:\(objects.count) age of Dog: \(item.age)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let dogs = self.realm.objects(Dog.self)</span><br><span class="line">for item in dogs &#123;</span><br><span class="line">    print(&quot;Count:\(dogs.count) age of Dog:\(item.name) Age:\(item.age)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let schemaVersion: UInt64 = 0</span><br><span class="line">let config = Realm.Configuration(</span><br><span class="line">    schemaVersion: schemaVersion,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        if (oldSchemaVersion &lt; schemaVersion) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Realm.Configuration.defaultConfiguration = config</span><br><span class="line">Realm.asyncOpen &#123; (realm, error) in</span><br><span class="line">    if let _ = realm &#123;</span><br><span class="line">        print(&quot;Realm 数据库配置成功&quot;)</span><br><span class="line">    &#125; else if let error = error &#123;</span><br><span class="line">        print(&quot;Realm 数据库配置失败：\(error.localizedDescription)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>值的更新</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Realm.Configuration.defaultConfiguration = Realm.Configuration(</span><br><span class="line">    schemaVersion: 1,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        if (oldSchemaVersion &lt; 1) &#123;</span><br><span class="line">            // enumerateObjects(ofType:_:) 方法将会遍历</span><br><span class="line">            // 所有存储在 Realm 文件当中的 `Person` 对象</span><br><span class="line">            migration.enumerateObjects(ofType: Person.className()) &#123; oldObject, newObject in</span><br><span class="line">                // 将两个 name 合并到 fullName 当中</span><br><span class="line">                let firstName = oldObject![&quot;firstName&quot;] as! String</span><br><span class="line">                let lastName = oldObject![&quot;lastName&quot;] as! String</span><br><span class="line">                newObject![&quot;fullName&quot;] = &quot;\(firstName) \(lastName)&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>属性重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Realm.Configuration.defaultConfiguration = Realm.Configuration(</span><br><span class="line">    schemaVersion: 1,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        // 我们目前还未执行过迁移，因此 oldSchemaVersion == 0</span><br><span class="line">        if (oldSchemaVersion &lt; 1) &#123;</span><br><span class="line">            // 重命名操作必须要在 `enumerateObjects(ofType: _:)` 调用之外进行</span><br><span class="line">            migration.renameProperty(onType: Person.className(), from: &quot;yearsSinceBirth&quot;, to: &quot;age&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a href = "https://realm.io/cn/docs/swift/latest/#migrations">Realm官方文档传送门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/03/2018-12-03-Realm/" data-id="ckuntv93h000uljnva90k4ufw" data-title="【Realm】数据存储" class="article-share-link">分享</a>
       
       
       
@@ -124,11 +604,23 @@
   
 
 
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
+
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub/">GitHub</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Github/Hexo/">Hexo</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/SublimeText/">SublimeText</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Jekyll/">Jekyll</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Cocoapods/">Cocoapods</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/CoreData/">CoreData</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/GCD/">GCD</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/">Objective-C</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/AVPlayer/">AVPlayer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/NSKeyedArchiver/">NSKeyedArchiver</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/Runtime/">Runtime</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/">Swift</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/ReactiveCocoa/">ReactiveCocoa</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/git/">git</a></li></ul></li></ul>
+    </div>
+  </div>
+
 
   
     
@@ -138,9 +630,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li></ul>
     </div>
   </div>
 
@@ -148,12 +640,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2021/10/12/hello-world/">Hello World</a>
+            <a href="/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">Hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/">GitHub上搭建Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/">Github配置SSH for Mac</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/">iOS带占位符【输入框】和输入数限制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/">iOS【AVPlayer视频播放器】</a>
           </li>
         
       </ul>
@@ -169,7 +677,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 John Doe<br>
+      &copy; 2021 JasonMark<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

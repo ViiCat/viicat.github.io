@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【MySQL】使用笔记 | JM笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="增加 数据库中文显示乱码 安装MariaDB安装:yum install mariadb mariadb-server 启动:systemctl start mariadb 重启:systemctl restart mariadb 添加到开机启动systemctl enable mariadb.service 配置mysql_secure_installation 登录数据库mysql -u ro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【MySQL】使用笔记">
+<meta property="og:url" content="http://example.com/2018/10/19/2018-10-19-MySQL%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="JM笔记">
+<meta property="og:description" content="增加 数据库中文显示乱码 安装MariaDB安装:yum install mariadb mariadb-server 启动:systemctl start mariadb 重启:systemctl restart mariadb 添加到开机启动systemctl enable mariadb.service 配置mysql_secure_installation 登录数据库mysql -u ro">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-19T08:41:24.000Z">
+<meta property="article:modified_time" content="2021-10-12T03:51:54.969Z">
+<meta property="article:author" content="JasonMark">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="JM笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JM笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">项目中的一些出现频繁且可复用的知识点</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2018-10-19-MySQL使用笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/19/2018-10-19-MySQL%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-10-19T08:41:24.000Z" itemprop="datePublished">2018-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【MySQL】使用笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a href="#mysql_add">增加</a></p>
+<p><a href="#mariadb_encoding">数据库中文显示乱码</a></p>
+<h2 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h2><p>安装:<code>yum install mariadb mariadb-server</code></p>
+<p>启动:<code>systemctl start mariadb</code></p>
+<p>重启:<code>systemctl restart mariadb</code></p>
+<p>添加到开机启动<code>systemctl enable mariadb.service</code></p>
+<p>配置<br><code>mysql_secure_installation</code></p>
+<p>登录数据库<code>mysql -u root -p</code></p>
+<p>显示数据库<code>SHOW DATABASE;</code></p>
+<p>显示数据库中的表<code>SHOW TABLES;</code></p>
+<p>查看表的数据结构<code>DESC user;</code></p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>创建mysql数据库<code>CREATE DATABASE mysql;</code></p>
+<p>进入数据库<code>use mysql;</code></p>
+<p>创建表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,</span><br><span class="line">name VARCHAR(100) NOT NULL,</span><br><span class="line">gender VARCHAR(10),</span><br><span class="line">age INT,</span><br><span class="line">phone VARCHAR(100),</span><br><span class="line">submission_date DATE</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>查询mysql库下的user表中的所有<code>SELECT * FROM mysql.user;</code></p>
+<p>查询user表中的host，user，password字段<code>SELECT host,user,password from user;</code></p>
+<p>刷新数据库信息<code>flush privileges;</code></p>
+<h3 id="增加"><a href="#增加" class="headerlink" title="增加"></a><a name='mysql_add'></a>增加</h3><p>添加age字段到mysql表中<code>ALTER TABLE mysql ADD age VARCHAR(4);</code></p>
+<p>在name字段后添加字段age<code>ALTER TABLE mysql ADD age  VARCHAR(5)  AFTER name</code></p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>删除数据表<code>DROP TABLE table_name;</code></p>
+<p>删除age字段<code>ALTER TABLE mysql DROP age</code></p>
+<h1 id="PHP部分"><a href="#PHP部分" class="headerlink" title="PHP部分"></a>PHP部分</h1><h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">$servername = &quot;localhost&quot;; </span><br><span class="line">$username = &quot;username&quot;; </span><br><span class="line">$password = &quot;password&quot;; </span><br><span class="line"></span><br><span class="line">// 创建连接 </span><br><span class="line">$conn = mysqli_connect($servername, $username, $password); </span><br><span class="line"></span><br><span class="line">// 检测连接 </span><br><span class="line">if (!$conn) &#123; </span><br><span class="line">    die(&quot;Connection failed: &quot; . mysqli_connect_error()); </span><br><span class="line">&#125; </span><br><span class="line">echo &quot;Connected successfully&quot;; </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/php/php-mysql-create.html">https://www.w3cschool.cn/php/php-mysql-create.html</a></p>
+<h2 id="插入数据库"><a href="#插入数据库" class="headerlink" title="插入数据库"></a>插入数据库</h2><p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/php/php-mysql-insert.html">https://www.w3cschool.cn/php/php-mysql-insert.html</a></p>
+<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/php/php-mysql-select.html">https://www.w3cschool.cn/php/php-mysql-select.html</a></p>
+<h2 id="数据库中文显示乱码"><a href="#数据库中文显示乱码" class="headerlink" title="数据库中文显示乱码"></a><a name='mariadb_encoding'></a>数据库中文显示乱码</h2><p>查看当前使用的字符集<code>SHOW VARIABLES LIKE &#39;character%&#39;;</code><br>会显示一个信息表, 很多选项都不是<strong>utf8</strong></p>
+<h4 id="更改Client和Server编码都是UTF-8"><a href="#更改Client和Server编码都是UTF-8" class="headerlink" title="更改Client和Server编码都是UTF-8"></a>更改Client和Server编码都是UTF-8</h4><p><strong>Client</strong></p>
+<p><code>vim /etc/my.cnf.d/client.cnf</code></p>
+<p>在client.cnf中[client]添加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+
+<p><strong>Server</strong></p>
+<p><code>vim /etc/my.cnf.d/server.cnf</code></p>
+<p>在server.cnf中[mysqld]添加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init-connect=&#x27;SET NAMES utf8&#x27;  </span><br><span class="line">character-set-server = utf8</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启MariaDB"><a href="#重启MariaDB" class="headerlink" title="重启MariaDB"></a>重启MariaDB</h4><p><code>systemctl restart mariadb</code></p>
+<p>PS:重启mariadb服务后，<code>character_set_database</code>并没修改，可以直接设置<code>character_set_database</code>编码格式为utf8，如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set character_set_database = &#x27;utf8&#x27;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/10/19/2018-10-19-MySQL%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-id="ckuntv9250001ljnv82frc2p0" data-title="【MySQL】使用笔记" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/19/2018-10-19-Jekyll%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【Jekyll】使用笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/19/2018-10-19-PHP+MySQL%E5%86%99%E7%AE%80%E5%8D%95%E6%8E%A5%E5%8F%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【PHP】写简单接口</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub/">GitHub</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Github/Hexo/">Hexo</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/SublimeText/">SublimeText</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Jekyll/">Jekyll</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Cocoapods/">Cocoapods</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/CoreData/">CoreData</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/GCD/">GCD</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/">Objective-C</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/AVPlayer/">AVPlayer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/NSKeyedArchiver/">NSKeyedArchiver</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/Runtime/">Runtime</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/">Swift</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/ReactiveCocoa/">ReactiveCocoa</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/git/">git</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">Hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/">GitHub上搭建Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/">Github配置SSH for Mac</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/">iOS带占位符【输入框】和输入数限制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/">iOS【AVPlayer视频播放器】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 JasonMark<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

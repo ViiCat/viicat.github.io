@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>RAC demo for Swift | JM笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="此Demo用RAC展示简单的登录界面: 1、界面实现允许输入最多11位字符的用户名 2、当输入6位以上密码且11位字符达成条件后，登录按钮背景变成红色 Demo 传送门 效果  上代码LoginViewModel.swift 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RAC demo for Swift">
+<meta property="og:url" content="http://example.com/2018/12/10/2018-12-10-RAC_demo_for_swift/index.html">
+<meta property="og:site_name" content="JM笔记">
+<meta property="og:description" content="此Demo用RAC展示简单的登录界面: 1、界面实现允许输入最多11位字符的用户名 2、当输入6位以上密码且11位字符达成条件后，登录按钮背景变成红色 Demo 传送门 效果  上代码LoginViewModel.swift 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/racswift.gif">
+<meta property="article:published_time" content="2018-12-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-12T08:03:35.273Z">
+<meta property="article:author" content="JasonMark">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/racswift.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="JM笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JM笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">项目中的一些出现频繁且可复用的知识点</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2018-12-10-RAC_demo_for_swift" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/12/10/2018-12-10-RAC_demo_for_swift/" class="article-date">
+  <time class="dt-published" datetime="2018-12-10T00:00:00.000Z" itemprop="datePublished">2018-12-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/Swift/">Swift</a>►<a class="article-category-link" href="/categories/iOS/Swift/ReactiveCocoa/">ReactiveCocoa</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      RAC demo for Swift
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>此Demo用RAC展示简单的登录界面:</p>
+<p>1、界面实现允许输入最多11位字符的用户名</p>
+<p>2、当输入6位以上密码且11位字符达成条件后，登录按钮背景变成红色</p>
+<p><a href = "https://github.com/ViiCat/SSSwiftRAC">Demo 传送门</a></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><img src="/images/racswift.gif" width="300">
+
+<h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><p>LoginViewModel.swift</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">class LoginViewModel: NSObject &#123;</span><br><span class="line">    </span><br><span class="line">    func binding(account: UITextField, password: UITextField, loginButton: UIButton) &#123;</span><br><span class="line">        </span><br><span class="line">        // 信号</span><br><span class="line">        let accountSignal  = account.reactive.continuousTextValues</span><br><span class="line">        let passwordSignal = password.reactive.continuousTextValues</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // 用户名输入信号</span><br><span class="line">        let accountMapSignal = accountSignal.map(&#123; (value) -&gt; Bool in</span><br><span class="line">            </span><br><span class="line">            // 字符串大于11位数 截取前11位</span><br><span class="line">            if ((value!.characters.count) &gt; 11) &#123;</span><br><span class="line">                </span><br><span class="line">                let startIdx = value?.index((value!.startIndex), offsetBy: 0)</span><br><span class="line">                let endIdx = value?.index(startIdx!, offsetBy:11)</span><br><span class="line">                let result = value!.substring(with: startIdx!..&lt;endIdx!)</span><br><span class="line">                </span><br><span class="line">                account.text = result</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 返回信号的值</span><br><span class="line">            return  account.text!.characters.count == 11 ? true : false</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // 密码输入信号</span><br><span class="line">        let passwordMapSignal = passwordSignal.map(&#123; (value) -&gt; Bool in</span><br><span class="line">            // 返回信号的值</span><br><span class="line">            return value!.characters.count &gt; 5 ? true : false</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        // 合并信号</span><br><span class="line">        let bgColorSignl = Signal.combineLatest(accountMapSignal, passwordMapSignal).map &#123; (arg) -&gt; UIColor in</span><br><span class="line">            </span><br><span class="line">            let (value1, value2) = arg</span><br><span class="line">            return value1 &amp;&amp; value2 ? .red : .lightGray</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        let bgColor = Property(initial: .lightGray, then: bgColorSignl)</span><br><span class="line">        </span><br><span class="line">        // 绑定</span><br><span class="line">        loginButton.reactive.backgroundColor &lt;~ bgColor</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>LoginViewController.swift</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">class LoginViewController: UIViewController &#123;</span><br><span class="line"></span><br><span class="line">    @IBOutlet weak var txtAccount: UITextField!</span><br><span class="line">    </span><br><span class="line">    @IBOutlet weak var txtPwd: UITextField!</span><br><span class="line">    </span><br><span class="line">    @IBOutlet weak var btnLogin: UIButton!</span><br><span class="line">    </span><br><span class="line">    override func viewDidLoad() &#123;</span><br><span class="line">        super.viewDidLoad()</span><br><span class="line"></span><br><span class="line">        // Do any additional setup after loading the view.</span><br><span class="line">        let viewModel = LoginViewModel()</span><br><span class="line">        viewModel.binding(account: txtAccount, password: txtPwd, loginButton: btnLogin)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/12/10/2018-12-10-RAC_demo_for_swift/" data-id="ckuntv93i000xljnv6udu1xmh" data-title="RAC demo for Swift" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/19/2018-12-19-iOS%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%94%AF%E6%8C%81%E6%94%B9%E5%8F%98%E5%89%8D%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          iOS【生成二维码】支持改变前背景颜色
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/06/2018-12-06-ReactiveCocoa/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【ReactiveCocoa】 for Swift and OC</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub/">GitHub</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Github/Hexo/">Hexo</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/SublimeText/">SublimeText</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Jekyll/">Jekyll</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Cocoapods/">Cocoapods</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/CoreData/">CoreData</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/GCD/">GCD</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/">Objective-C</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/AVPlayer/">AVPlayer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/NSKeyedArchiver/">NSKeyedArchiver</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/Runtime/">Runtime</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/">Swift</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/ReactiveCocoa/">ReactiveCocoa</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/git/">git</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">Hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/">GitHub上搭建Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/">Github配置SSH for Mac</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/">iOS带占位符【输入框】和输入数限制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/">iOS【AVPlayer视频播放器】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 JasonMark<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

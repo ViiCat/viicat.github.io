@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【GCD】多线程 | JM笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="GCD多线程线程之间通信12345678910dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&amp;#123;        NSString *str &#x3D; @&quot;更新主线程UI&quot;;        NSLog(@&quot;%@&quot;,str);        disp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【GCD】多线程">
+<meta property="og:url" content="http://example.com/2018/11/22/2018-11-22-GCD%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:site_name" content="JM笔记">
+<meta property="og:description" content="GCD多线程线程之间通信12345678910dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&amp;#123;        NSString *str &#x3D; @&quot;更新主线程UI&quot;;        NSLog(@&quot;%@&quot;,str);        disp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-12T08:09:03.865Z">
+<meta property="article:author" content="JasonMark">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="JM笔记" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JM笔记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">项目中的一些出现频繁且可复用的知识点</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2018-11-22-GCD多线程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/11/22/2018-11-22-GCD%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2018-11-22T00:00:00.000Z" itemprop="datePublished">2018-11-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>►<a class="article-category-link" href="/categories/iOS/GCD/">GCD</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【GCD】多线程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="GCD多线程"><a href="#GCD多线程" class="headerlink" title="GCD多线程"></a>GCD多线程</h2><h3 id="线程之间通信"><a href="#线程之间通信" class="headerlink" title="线程之间通信"></a>线程之间通信</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">    </span><br><span class="line">    NSString *str = @&quot;更新主线程UI&quot;;</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;%@&quot;,str);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        ///执行更新UI</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br/>
+### 串行
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;MULT&quot;, NULL);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    sleep(3);</span><br><span class="line">    NSLog(@&quot;A任务&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    sleep(2);</span><br><span class="line">    NSLog(@&quot;B任务&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    sleep(1);</span><br><span class="line">    NSLog(@&quot;C任务&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<br/>
+### 并行
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    sleep(3);</span><br><span class="line">    NSLog(@&quot;A任务&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    sleep(2);</span><br><span class="line">    NSLog(@&quot;B任务&quot;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    sleep(1);</span><br><span class="line">    NSLog(@&quot;C任务&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<br/>
+
+<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line"></span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    sleep(3);</span><br><span class="line">    NSLog(@&quot;A任务&quot;);</span><br><span class="line">    [self printLog:@&quot;A任务&quot;];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_group_notify(group, queue, ^&#123;</span><br><span class="line">    NSLog(@&quot;notify任务&quot;);</span><br><span class="line">    [self printLog:@&quot;notify任务&quot;];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    sleep(2);</span><br><span class="line">    NSLog(@&quot;B任务&quot;);</span><br><span class="line">    [self printLog:@&quot;B任务&quot;];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    sleep(1);</span><br><span class="line">    NSLog(@&quot;C任务&quot;);</span><br><span class="line">    [self printLog:@&quot;C任务&quot;];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="屏障"><a href="#屏障" class="headerlink" title="屏障"></a>屏障</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;MULT&quot;, DISPATCH_QUEUE_CONCURRENT);//DISPATCH_QUEUE_SERIAL);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    sleep(3);</span><br><span class="line">    NSLog(@&quot;A任务&quot;);</span><br><span class="line">    [self printLog:@&quot;A任务&quot;];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    sleep(2);</span><br><span class="line">    NSLog(@&quot;B任务&quot;);</span><br><span class="line">    [self printLog:@&quot;B任务&quot;];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    </span><br><span class="line">    sleep(4);</span><br><span class="line">    NSLog(@&quot;X任务&quot;);</span><br><span class="line">    [self printLog:@&quot;X任务&quot;];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_barrier_async(queue, ^&#123;</span><br><span class="line">    NSLog(@&quot;barrier任务&quot;);</span><br><span class="line">    [self printLog:@&quot;barrier任务&quot;];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    sleep(1);</span><br><span class="line">    NSLog(@&quot;C任务&quot;);</span><br><span class="line">    [self printLog:@&quot;C任务&quot;];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>参考文章：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2d57c72016c6">https://www.jianshu.com/p/2d57c72016c6</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/11/22/2018-11-22-GCD%E5%A4%9A%E7%BA%BF%E7%A8%8B/" data-id="ckuntv92f000gljnv3xhsebcx" data-title="【GCD】多线程" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/11/22/2018-11-22-%E7%BA%BF%E7%A8%8B%E9%94%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【线程锁】使用笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/22/2018-11-22-RunLoop%E5%9C%A8%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【RunLoop】跑圈</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub/">GitHub</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Github/Hexo/">Hexo</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/">IDE</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/IDE/SublimeText/">SublimeText</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Jekyll/">Jekyll</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/">iOS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Cocoapods/">Cocoapods</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/CoreData/">CoreData</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/GCD/">GCD</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/">Objective-C</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/AVPlayer/">AVPlayer</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/NSKeyedArchiver/">NSKeyedArchiver</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Objective-C/Runtime/">Runtime</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/">Swift</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/iOS/Swift/ReactiveCocoa/">ReactiveCocoa</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/git/">git</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/12/Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">Hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-GitHub%E4%B8%8A%E6%90%AD%E5%BB%BAHexo/">GitHub上搭建Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/12/2021-10-12-Github%E9%85%8D%E7%BD%AESSH-for-Mac/">Github配置SSH for Mac</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/04/2019-02-04-iOS%E5%B8%A6%E5%8D%A0%E4%BD%8D%E7%AC%A6%E8%BE%93%E5%85%A5%E6%A1%86%E5%92%8C%E8%BE%93%E5%85%A5%E6%95%B0%E9%99%90%E5%88%B6/">iOS带占位符【输入框】和输入数限制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/09/2019-01-09-iOS%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/">iOS【AVPlayer视频播放器】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 JasonMark<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
