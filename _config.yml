@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: JM笔记
+subtitle: '项目中的一些出现频繁且可复用的知识点'
 description: ''
-keywords:
-author: John Doe
-language: en
+keywords: iOS
+author: JasonMark
+language: zh-CN
 timezone: ''
 
 # URL
