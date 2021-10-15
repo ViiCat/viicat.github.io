@@ -152,6 +152,216 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/03/2018-12-03-Realm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JasonMark">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JM笔记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/03/2018-12-03-Realm/" class="post-title-link" itemprop="url">【Realm】数据存储</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-03 08:00:00" itemprop="dateCreated datePublished" datetime="2018-12-03T08:00:00+08:00">2018-12-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-12 16:08:13" itemprop="dateModified" datetime="2021-10-12T16:08:13+08:00">2021-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/Swift/" itemprop="url" rel="index"><span itemprop="name">Swift</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h3><h3 id="打印Realm文件存放路径"><a href="#打印Realm文件存放路径" class="headerlink" title="打印Realm文件存放路径"></a>打印Realm文件存放路径</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let realm = try! Realm()</span><br><span class="line">print(realm.configuration.fileURL!)</span><br></pre></td></tr></table></figure>
+<p>可以用RealmBrowser打开路径下的.realm文件，可视化管理它。<br><a href = "https://itunes.apple.com/cn/app/realm-browser/id1007457278?mt=12">RealmBrowser传送门</a></p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Dog: Object &#123;</span><br><span class="line">    @objc dynamic var id = UUID().uuidString</span><br><span class="line">    @objc dynamic var age = 0</span><br><span class="line">    @objc dynamic var firstName: String? = nil</span><br><span class="line">    @objc dynamic var lastName: String? = nil</span><br><span class="line">    @objc dynamic var name: String? = nil</span><br><span class="line"></span><br><span class="line">    // 索引</span><br><span class="line">    override class func indexedProperties() -&gt; [String] &#123;</span><br><span class="line">        return [&quot;name&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 主键不支持递增</span><br><span class="line">    override class func primaryKey() -&gt; String? &#123;</span><br><span class="line">        return &quot;id&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 忽略存储字段</span><br><span class="line">    override class func ignoredProperties() -&gt; [String] &#123;</span><br><span class="line">        return [&quot;&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let dog = Dog()</span><br><span class="line">dog.name = &quot;Petter&quot;</span><br><span class="line">dog.age = 2</span><br><span class="line"></span><br><span class="line">try! realm.write &#123;</span><br><span class="line">    realm.add(dog)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let objects = self.realm.objects(Dog.self).filter(&quot;age = 6&quot;)</span><br><span class="line">try! self.realm.write(&#123;</span><br><span class="line">    self.realm.delete(objects)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let objects = self.realm.objects(Dog.self).filter(&quot;age = 2&quot;)</span><br><span class="line">try! self.realm.write &#123;</span><br><span class="line">    for item in objects &#123;</span><br><span class="line">        item.age = 6</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for item in objects &#123;</span><br><span class="line">    print(&quot;Count:\(objects.count) age of Dog: \(item.age)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let dogs = self.realm.objects(Dog.self)</span><br><span class="line">for item in dogs &#123;</span><br><span class="line">    print(&quot;Count:\(dogs.count) age of Dog:\(item.name) Age:\(item.age)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let schemaVersion: UInt64 = 0</span><br><span class="line">let config = Realm.Configuration(</span><br><span class="line">    schemaVersion: schemaVersion,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        if (oldSchemaVersion &lt; schemaVersion) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Realm.Configuration.defaultConfiguration = config</span><br><span class="line">Realm.asyncOpen &#123; (realm, error) in</span><br><span class="line">    if let _ = realm &#123;</span><br><span class="line">        print(&quot;Realm 数据库配置成功&quot;)</span><br><span class="line">    &#125; else if let error = error &#123;</span><br><span class="line">        print(&quot;Realm 数据库配置失败：\(error.localizedDescription)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>值的更新</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Realm.Configuration.defaultConfiguration = Realm.Configuration(</span><br><span class="line">    schemaVersion: 1,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        if (oldSchemaVersion &lt; 1) &#123;</span><br><span class="line">            // enumerateObjects(ofType:_:) 方法将会遍历</span><br><span class="line">            // 所有存储在 Realm 文件当中的 `Person` 对象</span><br><span class="line">            migration.enumerateObjects(ofType: Person.className()) &#123; oldObject, newObject in</span><br><span class="line">                // 将两个 name 合并到 fullName 当中</span><br><span class="line">                let firstName = oldObject![&quot;firstName&quot;] as! String</span><br><span class="line">                let lastName = oldObject![&quot;lastName&quot;] as! String</span><br><span class="line">                newObject![&quot;fullName&quot;] = &quot;\(firstName) \(lastName)&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<br/>
+
+<p>属性重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Realm.Configuration.defaultConfiguration = Realm.Configuration(</span><br><span class="line">    schemaVersion: 1,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        // 我们目前还未执行过迁移，因此 oldSchemaVersion == 0</span><br><span class="line">        if (oldSchemaVersion &lt; 1) &#123;</span><br><span class="line">            // 重命名操作必须要在 `enumerateObjects(ofType: _:)` 调用之外进行</span><br><span class="line">            migration.renameProperty(onType: Person.className(), from: &quot;yearsSinceBirth&quot;, to: &quot;age&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a href = "https://realm.io/cn/docs/swift/latest/#migrations">Realm官方文档传送门</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/01/2018-12-01-CoreData/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JasonMark">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JM笔记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/01/2018-12-01-CoreData/" class="post-title-link" itemprop="url">【CoreData】</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-01 08:00:00" itemprop="dateCreated datePublished" datetime="2018-12-01T08:00:00+08:00">2018-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-12 16:00:43" itemprop="dateModified" datetime="2021-10-12T16:00:43+08:00">2021-10-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/CoreData/" itemprop="url" rel="index"><span itemprop="name">CoreData</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="CoreData"><a href="#CoreData" class="headerlink" title="CoreData"></a>CoreData</h3><h4 id="创建-xcdatamodeld文件"><a href="#创建-xcdatamodeld文件" class="headerlink" title="创建.xcdatamodeld文件"></a>创建.xcdatamodeld文件</h4><p>NewFile-&gt;DataModel-&gt;Next-&gt;Create</p>
+<p>打开创建的.xcdatamodeld，长按<code>Add Entity</code>按钮，选择添加一个实体叫<code>Department</code></p>
+<p>选中Department实体，右边会有三个栏目：<code>Attribute</code>(列)、<code>Rlashionships(关联)</code>、<code>Fetched Properties(获取过滤)</code></p>
+<h3 id="生成映射文件"><a href="#生成映射文件" class="headerlink" title="生成映射文件"></a>生成映射文件</h3><p>选中<code>.xcdatamodeld</code>-&gt;<code>Editor</code>-&gt;<code>Create NSManagedObjectSub Class</code>，选择datamodel的名称-&gt;选择要生成的表-&gt;Create.</p>
+<p>生成的映射文件基本上不需要对其添加代码</p>
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><p>接下来会用到的类：</p>
+<blockquote>
+<ul>
+<li><p>NSPersistentContainer(封装了Core Data核心数据堆栈)，可用来获取到NSManagedObjectContext</p>
+</li>
+<li><p>NSManagedObjectContext(托管对象上下文)，用来增删改查验证数据等</p>
+</li>
+<li><p>NSEntityDescription(用来返回一个实体对象)</p>
+</li>
+<li><p>NSFetchRequest(对数据操作过滤条件)</p>
+</li>
+<li><p>NSPredicate(条件谓词)</p>
+</li>
+</ul>
+</blockquote>
+<h5 id="创建托管对象上下文"><a href="#创建托管对象上下文" class="headerlink" title="创建托管对象上下文"></a>创建托管对象上下文</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">NSPersistentContainer *container = [NSPersistentContainer persistentContainerWithName:@&quot;ViiCat&quot;];</span><br><span class="line"></span><br><span class="line">[container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * storeDescription , NSError *error) &#123;</span><br><span class="line">    if (error != nil) &#123;</span><br><span class="line">        NSLog(@&quot;Unresolved error %@, %@&quot;, error, error.userInfo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">// 托管对象上下文</span><br><span class="line">self.companyMOC = container.viewContext;</span><br></pre></td></tr></table></figure>
+<p><strong>增</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Employee *employeeModel = [NSEntityDescription insertNewObjectForEntityForName:@&quot;Employee&quot; inManagedObjectContext:self.companyMOC];</span><br><span class="line">employeeModel.name = @&quot;Jason&quot;;</span><br><span class="line">employeeModel.age = 18;</span><br><span class="line">employeeModel.height = 1.83;</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;存储失败:%@&quot;, error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Employee&quot;];</span><br><span class="line"></span><br><span class="line">NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;name = %@&quot;, @&quot;Jason&quot;];</span><br><span class="line">fetchRequest.predicate = predicate;</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSArray&lt;Employee *&gt; *objects = [self.companyMOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line"></span><br><span class="line">[objects enumerateObjectsUsingBlock:^(Employee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">    [self.companyMOC deleteObject:obj];</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;删除失败:%@&quot;,error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>改</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Employee&quot;];</span><br><span class="line"></span><br><span class="line">NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;name = %@&quot;, @&quot;Jason&quot;];</span><br><span class="line">fetchRequest.predicate = predicate;</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSArray&lt;Employee *&gt; *objects = [self.companyMOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line"></span><br><span class="line">[objects enumerateObjectsUsingBlock:^(Employee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">    obj.name = @&quot;Tom&quot;;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;修改失败:%@&quot;,error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>查</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Employee&quot;];</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSArray&lt;Employee *&gt; *objects = [self.companyMOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line"></span><br><span class="line">[objects enumerateObjectsUsingBlock:^(Employee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">    NSLog(@&quot;\nEmployee(Name:%@,Age:%d,Height:%f)&quot;,obj.name, obj.age, obj.height);</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;查找失败:%@&quot;,error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="版本迁移"><a href="#版本迁移" class="headerlink" title="版本迁移"></a>版本迁移</h3><p>选中<code>.xcdatamodeld</code>-&gt;<code>Editor</code>-&gt;<code>Add Model Version</code>-&gt;<code>Finish</code>-&gt;选中新生成的版本<code>Show File Inspector</code>-&gt;<code>Model Version</code>组的Current选择刚生成的版本</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/26/2018-11-26-iOS%E5%BD%92%E6%A1%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -894,215 +1104,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/16/2018-11-16-Runtime+Category%E6%89%93%E5%8D%B0%E6%AF%8F%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%9B%E5%85%A5%E7%9A%84%E6%97%B6%E9%97%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JasonMark">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JM笔记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/16/2018-11-16-Runtime+Category%E6%89%93%E5%8D%B0%E6%AF%8F%E4%B8%AA%E9%A1%B5%E9%9D%A2%E8%BF%9B%E5%85%A5%E7%9A%84%E6%97%B6%E9%97%B4/" class="post-title-link" itemprop="url">【Runtime】+【Category】打印每个页面进入的时间</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-16 08:00:00" itemprop="dateCreated datePublished" datetime="2018-11-16T08:00:00+08:00">2018-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-12 16:12:25" itemprop="dateModified" datetime="2021-10-12T16:12:25+08:00">2021-10-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/Objective-C/" itemprop="url" rel="index"><span itemprop="name">Objective-C</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/Objective-C/Runtime/" itemprop="url" rel="index"><span itemprop="name">Runtime</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="首先创建类别文件-New-File-gt-Objective-C-File-gt-File-Type-选-Category"><a href="#首先创建类别文件-New-File-gt-Objective-C-File-gt-File-Type-选-Category" class="headerlink" title="首先创建类别文件 New File -&gt; Objective-C File -&gt; File Type 选 Category"></a>首先创建类别文件 New File -&gt; Objective-C File -&gt; File Type 选 Category</h4><p><strong>接下来编辑<code>.m</code>文件</strong>：</p>
-<p><code>UIViewController+Category.m</code></p>
-<p><strong>导入runtime文件头</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;objc/runtime.h&gt;</span><br></pre></td></tr></table></figure>
-
-<p>在<code>.m</code>文件里写入如下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">+ (void)load &#123;</span><br><span class="line">    </span><br><span class="line">    ///仅执行一次</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        </span><br><span class="line">        //获得方法的实例</span><br><span class="line">        Method wda = class_getInstanceMethod([self class], @selector(viewDidAppear:));</span><br><span class="line">        Method swizzlingWda = class_getInstanceMethod([self class], @selector(swizzling_viewDidAppear:));</span><br><span class="line">        </span><br><span class="line">        //避免源SEL没有实现IMP的情况</span><br><span class="line">        BOOL isAdd = class_addMethod([self class], method_getName(swizzlingWda), method_getImplementation(swizzlingWda), method_getTypeEncoding(swizzlingWda));</span><br><span class="line">        </span><br><span class="line">        if (isAdd) &#123;</span><br><span class="line">            class_replaceMethod([self class], method_getName(swizzlingWda), method_getImplementation(swizzlingWda), method_getTypeEncoding(swizzlingWda));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //关键,方法交换</span><br><span class="line">            method_exchangeImplementations(wda, swizzlingWda);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>加入需要替换成的方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)swizzling_viewDidAppear:(BOOL)animated &#123;</span><br><span class="line">    //原因在此之前方法已经完成了交换</span><br><span class="line">    //这句相当于调用-(void)viewDidAppear:(BOOL)animated; </span><br><span class="line">    [self swizzling_viewDidAppear:animated];</span><br><span class="line">    </span><br><span class="line">    //类名称</span><br><span class="line">    const char *cName = class_getName([self class]);</span><br><span class="line">    //系统时间</span><br><span class="line">    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</span><br><span class="line">    formatter.dateFormat = @&quot;yyyy-MM-dd HH:mm:ss&quot;;</span><br><span class="line">    NSString *strTime = [formatter stringFromDate:[NSDate date]];</span><br><span class="line">    NSLog(@&quot;\nClass:%@\nTime:%@&quot;,[NSString stringWithUTF8String:cName],strTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>Demo：<br><a target="_blank" rel="noopener" href="https://github.com/ViiCat/Demo">https://github.com/ViiCat/Demo<a/></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/11/16/2018-11-16-Runtime-SEL-IMP-Method-Ivar-isa/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JasonMark">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JM笔记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/16/2018-11-16-Runtime-SEL-IMP-Method-Ivar-isa/" class="post-title-link" itemprop="url">【Runtime】SEL、IMP、Method、Ivar、isa、Cache</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-16 08:00:00" itemprop="dateCreated datePublished" datetime="2018-11-16T08:00:00+08:00">2018-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-12 16:11:48" itemprop="dateModified" datetime="2021-10-12T16:11:48+08:00">2021-10-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/Objective-C/" itemprop="url" rel="index"><span itemprop="name">Objective-C</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Runtime-基本类型"><a href="#Runtime-基本类型" class="headerlink" title="Runtime 基本类型"></a>Runtime 基本类型</h3><p>SEL：选择器指向一个C String</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_selector *SEL;</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>IMP：指向实际执行函数体的函数指针</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#if !OBJC_OLD_DISPATCH_PROTOTYPES</span><br><span class="line">typedef void (*IMP)(void /* id, SEL, ... */ ); </span><br><span class="line">#else</span><br><span class="line">typedef id (*IMP)(id, SEL, ...); </span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>Method：指向方法的指针</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_method *Method;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct objc_method &#123;</span><br><span class="line">    SEL method_name                                          OBJC2_UNAVAILABLE;</span><br><span class="line">    char *method_types                                       OBJC2_UNAVAILABLE;</span><br><span class="line">    IMP method_imp                                           OBJC2_UNAVAILABLE;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>Ivar：成员变量指针</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_ivar *Ivar;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct objc_ivar &#123;</span><br><span class="line">    char *ivar_name                                          OBJC2_UNAVAILABLE;</span><br><span class="line">    char *ivar_type                                          OBJC2_UNAVAILABLE;</span><br><span class="line">    int ivar_offset                                          OBJC2_UNAVAILABLE;</span><br><span class="line">#ifdef __LP64__</span><br><span class="line">    int space                                                OBJC2_UNAVAILABLE;</span><br><span class="line">#endif</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>Property：属性指针</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_property *Property;</span><br><span class="line">typedef struct objc_property *objc_property_t;//这个更常用</span><br></pre></td></tr></table></figure>
-
-<p>isa：指向类的指针；id：<br><br/></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_object *id;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct objc_object &#123;</span><br><span class="line">    Class isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>Cache</p>
-<p>每当实例对象接收到消息时，它不会直接在isa指针指向的类方法列表里遍历查找能响应的方法，因为每次查找效率都太低，而优先在Cache中查找。<br>Runtime系统会把被调用的方法存进Cache里，就像计算机组成原理一样CUP绕过主存先访问Cache一样。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_cache *Cache</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct objc_cache &#123;</span><br><span class="line">    unsigned int mask /* total = mask + 1 */                 OBJC2_UNAVAILABLE;</span><br><span class="line">    unsigned int occupied                                    OBJC2_UNAVAILABLE;</span><br><span class="line">    Method buckets[1]                                        OBJC2_UNAVAILABLE;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<br/>
-<strong>参考文章</strong>
-
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Hello_Hwc/article/details/49682857">https://blog.csdn.net/Hello_Hwc/article/details/49682857</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1172,14 +1173,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>

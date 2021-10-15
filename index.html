@@ -152,6 +152,172 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/2021-10-13-cocoapods%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JasonMark">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JM笔记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/13/2021-10-13-cocoapods%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%93/" class="post-title-link" itemprop="url">自定义cocoapods库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-13 15:17:37" itemprop="dateCreated datePublished" datetime="2021-10-13T15:17:37+08:00">2021-10-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-15 18:50:48" itemprop="dateModified" datetime="2021-10-15T18:50:48+08:00">2021-10-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1、本地创建pod库"><a href="#1、本地创建pod库" class="headerlink" title="1、本地创建pod库"></a>1、本地创建pod库</h2><p>创建名为SSExtension的pod库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pod lib create SSExtension</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、添加库文件"><a href="#2、添加库文件" class="headerlink" title="2、添加库文件"></a>2、添加库文件</h2><p>将库文件放入 <code>SSExtension/Classes</code> 文件夹里</p>
+<p>cd 进 <code>Example</code> 路径下执行 <code>$ pod install </code>，执行完成后可见在工程中看到加入的文件。</p>
+<h2 id="3、将创建的库用git推到github上"><a href="#3、将创建的库用git推到github上" class="headerlink" title="3、将创建的库用git推到github上"></a>3、将创建的库用git推到github上</h2><p>cd 到 SSExtension 目录下执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br><span class="line">$ git remote add origin git@github.com:ViiCat/SSExtension.git</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -m&#x27;commit&#x27;</span><br><span class="line">$ git push origin master </span><br></pre></td></tr></table></figure>
+<p>(ps: 若报 ! [rejected]        master -&gt; master (non-fast-forward)<br>error: failed to push some refs to ‘github.com:ViiCat/SSExtension.git’ 说明，远程库有已存在文件，可用 <code>$ git push -f origin master</code> 进行强制覆盖)</p>
+<h2 id="4、注册-CocoaPods-Trunk"><a href="#4、注册-CocoaPods-Trunk" class="headerlink" title="4、注册 CocoaPods Trunk"></a>4、注册 CocoaPods Trunk</h2><p>用邮箱注册，注册成功会有邮件返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pod trunk register luemark@live.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、发布自定义库"><a href="#5、发布自定义库" class="headerlink" title="5、发布自定义库"></a>5、发布自定义库</h2><p>cd 到 SSExtension 目录 执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pod trunk push SSExtension.podspec --verbose</span><br></pre></td></tr></table></figure>
+<p>如果有警告就用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pod trunk push SSExtension.podspec --verbose --allow-warnings</span><br></pre></td></tr></table></figure>
+<p>直到显示</p>
+<img src="/images/cocoapods.jpg" width="300">
+
+<p>就算成功了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>.podspec 配置里的 <code>s.version = &#39;1.0.1&#39;</code> 版本号，必须和github上打的tag标签版本一致，否则会出现pod install不下来。<br>简单来说操作步骤就是：</p>
+<p>1、新建pod库 -&gt; 2、添加文件到<code>Class</code>目录，并编辑<code>.podspec</code>配置 -&gt; 3、把pod库上传到github并打<code>tag</code>版本 -&gt; 4、执行<code>pod trunk push SSExtension.podspec --verbose --allow-warnings</code>将库发布</p>
+<h1 id="git-相关"><a href="#git-相关" class="headerlink" title="git 相关"></a>git 相关</h1><p>打标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git tag 0.1.0 </span><br><span class="line">$ git push --tags 			// 本地标记推送所有标签</span><br><span class="line">$ git push origin master    	// 推到远程</span><br><span class="line">$ git tag 					// 查看标签</span><br><span class="line"></span><br><span class="line">$ git tag -d 0.1.0			// 删除标签</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/13/2021-10-13-%E5%AE%9E%E7%94%A8%E7%BD%91%E9%A1%B5%E5%9C%B0%E5%9D%80%E5%BD%92%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JasonMark">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JM笔记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/13/2021-10-13-%E5%AE%9E%E7%94%A8%E7%BD%91%E9%A1%B5%E5%9C%B0%E5%9D%80%E5%BD%92%E6%80%BB/" class="post-title-link" itemprop="url">实用网页地址归总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-13 10:48:02 / 修改时间：11:29:25" itemprop="dateCreated datePublished" datetime="2021-10-13T10:48:02+08:00">2021-10-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/" itemprop="url" rel="index"><span itemprop="name">网址导航</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="开发类一站式导航"><a href="#开发类一站式导航" class="headerlink" title="开发类一站式导航"></a>开发类一站式导航</h2><p><a target="_blank" rel="noopener" href="http://cxy521.com/">http://cxy521.com/</a></p>
+<h2 id="JSON-在线转-Model"><a href="#JSON-在线转-Model" class="headerlink" title="JSON 在线转 Model"></a>JSON 在线转 Model</h2><p><a target="_blank" rel="noopener" href="https://modelend.com/">https://modelend.com/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/12/2021-10-12-Hexo%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -175,10 +341,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-12 16:29:54 / 修改时间：16:37:50" itemprop="dateCreated datePublished" datetime="2021-10-12T16:29:54+08:00">2021-10-12</time>
+              <time title="创建时间：2021-10-12 16:29:54" itemprop="dateCreated datePublished" datetime="2021-10-12T16:29:54+08:00">2021-10-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-15 15:45:32" itemprop="dateModified" datetime="2021-10-15T15:45:32+08:00">2021-10-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -207,6 +379,12 @@
 <h2 id="本地执行"><a href="#本地执行" class="headerlink" title="本地执行"></a>本地执行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo serve </span><br></pre></td></tr></table></figure>
 
 <h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;article-title&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>然后就可以在<code>source/_posts/</code>找到刚刚创建的<code>xxx.md</code>文件，打开xxx.md即可开始写文章了</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/371995929">https://zhuanlan.zhihu.com/p/371995929</a></p>
+
       
     </div>
 
@@ -836,216 +1014,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/03/2018-12-03-Realm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JasonMark">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JM笔记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/03/2018-12-03-Realm/" class="post-title-link" itemprop="url">【Realm】数据存储</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-03 08:00:00" itemprop="dateCreated datePublished" datetime="2018-12-03T08:00:00+08:00">2018-12-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-12 16:08:13" itemprop="dateModified" datetime="2021-10-12T16:08:13+08:00">2021-10-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/Swift/" itemprop="url" rel="index"><span itemprop="name">Swift</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h3><h3 id="打印Realm文件存放路径"><a href="#打印Realm文件存放路径" class="headerlink" title="打印Realm文件存放路径"></a>打印Realm文件存放路径</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let realm = try! Realm()</span><br><span class="line">print(realm.configuration.fileURL!)</span><br></pre></td></tr></table></figure>
-<p>可以用RealmBrowser打开路径下的.realm文件，可视化管理它。<br><a href = "https://itunes.apple.com/cn/app/realm-browser/id1007457278?mt=12">RealmBrowser传送门</a></p>
-<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Dog: Object &#123;</span><br><span class="line">    @objc dynamic var id = UUID().uuidString</span><br><span class="line">    @objc dynamic var age = 0</span><br><span class="line">    @objc dynamic var firstName: String? = nil</span><br><span class="line">    @objc dynamic var lastName: String? = nil</span><br><span class="line">    @objc dynamic var name: String? = nil</span><br><span class="line"></span><br><span class="line">    // 索引</span><br><span class="line">    override class func indexedProperties() -&gt; [String] &#123;</span><br><span class="line">        return [&quot;name&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 主键不支持递增</span><br><span class="line">    override class func primaryKey() -&gt; String? &#123;</span><br><span class="line">        return &quot;id&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 忽略存储字段</span><br><span class="line">    override class func ignoredProperties() -&gt; [String] &#123;</span><br><span class="line">        return [&quot;&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let dog = Dog()</span><br><span class="line">dog.name = &quot;Petter&quot;</span><br><span class="line">dog.age = 2</span><br><span class="line"></span><br><span class="line">try! realm.write &#123;</span><br><span class="line">    realm.add(dog)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let objects = self.realm.objects(Dog.self).filter(&quot;age = 6&quot;)</span><br><span class="line">try! self.realm.write(&#123;</span><br><span class="line">    self.realm.delete(objects)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let objects = self.realm.objects(Dog.self).filter(&quot;age = 2&quot;)</span><br><span class="line">try! self.realm.write &#123;</span><br><span class="line">    for item in objects &#123;</span><br><span class="line">        item.age = 6</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for item in objects &#123;</span><br><span class="line">    print(&quot;Count:\(objects.count) age of Dog: \(item.age)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let dogs = self.realm.objects(Dog.self)</span><br><span class="line">for item in dogs &#123;</span><br><span class="line">    print(&quot;Count:\(dogs.count) age of Dog:\(item.name) Age:\(item.age)&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let schemaVersion: UInt64 = 0</span><br><span class="line">let config = Realm.Configuration(</span><br><span class="line">    schemaVersion: schemaVersion,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        if (oldSchemaVersion &lt; schemaVersion) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Realm.Configuration.defaultConfiguration = config</span><br><span class="line">Realm.asyncOpen &#123; (realm, error) in</span><br><span class="line">    if let _ = realm &#123;</span><br><span class="line">        print(&quot;Realm 数据库配置成功&quot;)</span><br><span class="line">    &#125; else if let error = error &#123;</span><br><span class="line">        print(&quot;Realm 数据库配置失败：\(error.localizedDescription)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>值的更新</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Realm.Configuration.defaultConfiguration = Realm.Configuration(</span><br><span class="line">    schemaVersion: 1,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        if (oldSchemaVersion &lt; 1) &#123;</span><br><span class="line">            // enumerateObjects(ofType:_:) 方法将会遍历</span><br><span class="line">            // 所有存储在 Realm 文件当中的 `Person` 对象</span><br><span class="line">            migration.enumerateObjects(ofType: Person.className()) &#123; oldObject, newObject in</span><br><span class="line">                // 将两个 name 合并到 fullName 当中</span><br><span class="line">                let firstName = oldObject![&quot;firstName&quot;] as! String</span><br><span class="line">                let lastName = oldObject![&quot;lastName&quot;] as! String</span><br><span class="line">                newObject![&quot;fullName&quot;] = &quot;\(firstName) \(lastName)&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<br/>
-
-<p>属性重命名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Realm.Configuration.defaultConfiguration = Realm.Configuration(</span><br><span class="line">    schemaVersion: 1,</span><br><span class="line">    migrationBlock: &#123; migration, oldSchemaVersion in</span><br><span class="line">        // 我们目前还未执行过迁移，因此 oldSchemaVersion == 0</span><br><span class="line">        if (oldSchemaVersion &lt; 1) &#123;</span><br><span class="line">            // 重命名操作必须要在 `enumerateObjects(ofType: _:)` 调用之外进行</span><br><span class="line">            migration.renameProperty(onType: Person.className(), from: &quot;yearsSinceBirth&quot;, to: &quot;age&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><a href = "https://realm.io/cn/docs/swift/latest/#migrations">Realm官方文档传送门</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2018/12/01/2018-12-01-CoreData/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="JasonMark">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JM笔记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/01/2018-12-01-CoreData/" class="post-title-link" itemprop="url">【CoreData】</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-01 08:00:00" itemprop="dateCreated datePublished" datetime="2018-12-01T08:00:00+08:00">2018-12-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-12 16:00:43" itemprop="dateModified" datetime="2021-10-12T16:00:43+08:00">2021-10-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/CoreData/" itemprop="url" rel="index"><span itemprop="name">CoreData</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="CoreData"><a href="#CoreData" class="headerlink" title="CoreData"></a>CoreData</h3><h4 id="创建-xcdatamodeld文件"><a href="#创建-xcdatamodeld文件" class="headerlink" title="创建.xcdatamodeld文件"></a>创建.xcdatamodeld文件</h4><p>NewFile-&gt;DataModel-&gt;Next-&gt;Create</p>
-<p>打开创建的.xcdatamodeld，长按<code>Add Entity</code>按钮，选择添加一个实体叫<code>Department</code></p>
-<p>选中Department实体，右边会有三个栏目：<code>Attribute</code>(列)、<code>Rlashionships(关联)</code>、<code>Fetched Properties(获取过滤)</code></p>
-<h3 id="生成映射文件"><a href="#生成映射文件" class="headerlink" title="生成映射文件"></a>生成映射文件</h3><p>选中<code>.xcdatamodeld</code>-&gt;<code>Editor</code>-&gt;<code>Create NSManagedObjectSub Class</code>，选择datamodel的名称-&gt;选择要生成的表-&gt;Create.</p>
-<p>生成的映射文件基本上不需要对其添加代码</p>
-<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><p>接下来会用到的类：</p>
-<blockquote>
-<ul>
-<li><p>NSPersistentContainer(封装了Core Data核心数据堆栈)，可用来获取到NSManagedObjectContext</p>
-</li>
-<li><p>NSManagedObjectContext(托管对象上下文)，用来增删改查验证数据等</p>
-</li>
-<li><p>NSEntityDescription(用来返回一个实体对象)</p>
-</li>
-<li><p>NSFetchRequest(对数据操作过滤条件)</p>
-</li>
-<li><p>NSPredicate(条件谓词)</p>
-</li>
-</ul>
-</blockquote>
-<h5 id="创建托管对象上下文"><a href="#创建托管对象上下文" class="headerlink" title="创建托管对象上下文"></a>创建托管对象上下文</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">NSPersistentContainer *container = [NSPersistentContainer persistentContainerWithName:@&quot;ViiCat&quot;];</span><br><span class="line"></span><br><span class="line">[container loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * storeDescription , NSError *error) &#123;</span><br><span class="line">    if (error != nil) &#123;</span><br><span class="line">        NSLog(@&quot;Unresolved error %@, %@&quot;, error, error.userInfo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">// 托管对象上下文</span><br><span class="line">self.companyMOC = container.viewContext;</span><br></pre></td></tr></table></figure>
-<p><strong>增</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Employee *employeeModel = [NSEntityDescription insertNewObjectForEntityForName:@&quot;Employee&quot; inManagedObjectContext:self.companyMOC];</span><br><span class="line">employeeModel.name = @&quot;Jason&quot;;</span><br><span class="line">employeeModel.age = 18;</span><br><span class="line">employeeModel.height = 1.83;</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;存储失败:%@&quot;, error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>删</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Employee&quot;];</span><br><span class="line"></span><br><span class="line">NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;name = %@&quot;, @&quot;Jason&quot;];</span><br><span class="line">fetchRequest.predicate = predicate;</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSArray&lt;Employee *&gt; *objects = [self.companyMOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line"></span><br><span class="line">[objects enumerateObjectsUsingBlock:^(Employee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">    [self.companyMOC deleteObject:obj];</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;删除失败:%@&quot;,error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>改</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Employee&quot;];</span><br><span class="line"></span><br><span class="line">NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;name = %@&quot;, @&quot;Jason&quot;];</span><br><span class="line">fetchRequest.predicate = predicate;</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSArray&lt;Employee *&gt; *objects = [self.companyMOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line"></span><br><span class="line">[objects enumerateObjectsUsingBlock:^(Employee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">    obj.name = @&quot;Tom&quot;;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;修改失败:%@&quot;,error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>查</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Employee&quot;];</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSArray&lt;Employee *&gt; *objects = [self.companyMOC executeFetchRequest:fetchRequest error:&amp;error];</span><br><span class="line"></span><br><span class="line">[objects enumerateObjectsUsingBlock:^(Employee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">    NSLog(@&quot;\nEmployee(Name:%@,Age:%d,Height:%f)&quot;,obj.name, obj.age, obj.height);</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">if (self.companyMOC.hasChanges) &#123;</span><br><span class="line">    [self.companyMOC save:&amp;error];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">    NSLog(@&quot;查找失败:%@&quot;,error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="版本迁移"><a href="#版本迁移" class="headerlink" title="版本迁移"></a>版本迁移</h3><p>选中<code>.xcdatamodeld</code>-&gt;<code>Editor</code>-&gt;<code>Add Model Version</code>-&gt;<code>Finish</code>-&gt;选中新生成的版本<code>Show File Inspector</code>-&gt;<code>Model Version</code>组的Current选择刚生成的版本</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1115,14 +1083,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
