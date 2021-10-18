@@ -49,7 +49,7 @@ $ pod trunk push SSExtension.podspec --verbose --allow-warnings
 ```
 直到显示
 
-<img src="/images/cocoapods.jpg" width="300">
+<img src="/images/cocoapods.jpg">
 
 就算成功了
 
